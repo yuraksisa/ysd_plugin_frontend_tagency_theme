@@ -1,78 +1,136 @@
-<form action="javascript:;" class="form1">
+<!-- Search form -->
+<form name="search_form" class="form1" action="<%=format_url_with_language('/reserva/producto')%>" method="post">
   <div class="row">
-    <div class="col-sm-4 col-md-2">
-      <div class="select1_wrapper">
-        <label>Country:</label>
-        <div class="select1_inner">
-          <select class="select2 select" style="width: 100%">
-            <option value="1">Please Select</option>
-            <option value="2">Alaska</option>
-            <option value="3">Bahamas</option>
-            <option value="4">Bermuda</option>
-            <option value="5">Canada</option>
-            <option value="6">Caribbean</option>
-            <option value="7">Europe</option>
-            <option value="8">Hawaii</option>
-          </select>
+    <!-- Date from (+ time from) - Date to (+ time to) - pickup/return place -->
+    <% if booking_item_family and booking_item_family.pickup_return_place and booking_item_family.time_to_from %>
+      <div class="col-sm-6">
+        <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+        <div class="select1_wrapper">
+          <label for="pickup_place">
+            <%=t.front_end_reservation.pickup_place%>:
+          </label>
+          <div class="select1_inner">
+            <select name="pickup_place" id="pickup_place" class="select2 select">
+            </select>
+          </div>
+        </div>
+          <% if pickup_return_places_configuration == 'list+custom'%>
+          <div id="another_pickup_place_group" class="form-group">
+            <label for="pickup_place">
+              <%=t.front_end_reservation.pickup_place%>:
+            </label>
+            <div class="textarea_wrapper">
+              <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+              <input type="hidden" name="custom_pickup_place" value="false"/>
+            </div>
+          </div>
+          <% end %>
+        <% else %>
+        <div class="form-group">
+          <label for="pickup_place">
+            <%=t.front_end_reservation.pickup_place%>:
+          </label>
+          <div class="textarea_wrapper">
+            <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+            <i class="fa fa-map-marker"></i>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_from">
+            <%=t.front_end_reservation.date_from%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="select1_wrapper">
+          <label for="time_from">
+            <%=t.front_end_reservation.time_from%>:
+          </label>
+          <div class="select1_inner">
+            <select name="time_from" id="time_from" class="select2 select">
+            </select>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-sm-4 col-md-2">
-      <div class="select1_wrapper">
-        <label>City:</label>
-        <div class="select1_inner">
-          <select class="select2 select" style="width: 100%">
-            <option value="1">Please Select</option>
-            <option value="2">Alaska</option>
-            <option value="3">Bahamas</option>
-            <option value="4">Bermuda</option>
-            <option value="5">Canada</option>
-            <option value="6">Caribbean</option>
-            <option value="7">Europe</option>
-            <option value="8">Hawaii</option>
-          </select>
+    <br/>
+    <div class="row">
+      <div class="col-sm-6">
+        <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+          <div class="select1_wrapper">
+            <label for="return_place">
+              <%=t.front_end_reservation.return_place%>:
+            </label>
+            <div class="select1_inner">
+              <select name="return_place" id="return_place" class="select2 select">
+              </select>
+            </div>
+          </div>
+          <% if pickup_return_places_configuration == 'list+custom'%>
+            <div id="another_return_place_group" class="form-group">
+              <label for="return_place_other">
+                <%=t.front_end_reservation.return_place%>:
+              </label>
+              <div class="textarea_wrapper">
+                <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                <input type="hidden" name="custom_pickup_place" value="false"/>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="form-group">
+            <label for="return_place_other">
+              <%=t.front_end_reservation.return_place%>:
+            </label>
+            <div class="textarea_wrapper">
+              <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+              <i class="fa fa-map-marker"></i>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_to">
+            <%=t.front_end_reservation.date_to%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-4 col-md-2">
-      <div class="select1_wrapper">
-        <label>Location:</label>
-        <div class="select1_inner">
-          <select class="select2 select" style="width: 100%">
-            <option value="1">Please Select</option>
-            <option value="2">Alaska</option>
-            <option value="3">Bahamas</option>
-            <option value="4">Bermuda</option>
-            <option value="5">Canada</option>
-            <option value="6">Caribbean</option>
-            <option value="7">Europe</option>
-            <option value="8">Hawaii</option>
-          </select>
+      <div class="col-sm-3">
+        <div class="select1_wrapper">
+          <label for="time_to">
+            <%=t.front_end_reservation.time_to%>:
+          </label>
+          <div class="select1_inner">
+            <select name="time_to" id="time_to" class="select2 select">
+            </select>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-4 col-md-2">
-      <div class="input1_wrapper">
-        <label>Pick up Date:</label>
-        <div class="input1_inner">
-          <input type="text" class="input datepicker" value="Mm/Dd/Yy">
-        </div>
       </div>
-    </div>
-    <div class="col-sm-4 col-md-2">
-      <div class="input1_wrapper">
-        <label>Drop off Date:</label>
-        <div class="input1_inner">
-          <input type="text" class="input datepicker" value="Mm/Dd/Yy">
-        </div>
+    <br/>
+    <% if driver_partial or promotion_code_partial %>
+      <div class="row">
+        <% if driver_partial %>
+          <div class="col-sm-6">
+            <%= driver_partial %>
+          </div>
+        <% end %>
+        <% if promotion_code_partial %>
+          <div class="col-sm-6">
+            <%= promotion_code_partial %>
+          </div>
+        <% end %>
       </div>
-    </div>
-
-
-    <div class="col-sm-4 col-md-2">
-      <div class="button1_wrapper">
-        <button type="submit" class="btn-default btn-form1-submit">Search</button>
-      </div>
-    </div>
-  </div>
+    <% end %>
+  <% end %>
 </form>
