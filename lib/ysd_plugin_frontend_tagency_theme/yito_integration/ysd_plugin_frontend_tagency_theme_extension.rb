@@ -34,7 +34,7 @@ module YsdPluginFrontendTagencyTheme
     #
     # Return the front end skin
     #
-    def frontend_skin
+    def frontend_skin(context={})
       ['tagency']
     end
 
