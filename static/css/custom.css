@@ -1,0 +1,38 @@
+/* Portrait tablet to landscape and desktop */
+.form1 .textarea_wrapper {
+    position: relative;
+}
+.form1 .textarea_wrapper .textarea_inner {
+    position: relative;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    height: 42px;
+    position: relative;
+    padding: 10px 25px 10px 15px;
+    height: 40px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    color: #c2c2c2;
+    font-size: 13px !important;
+    line-height: 20px;
+    font-family: inherit !important;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: vertical;
+}
+.form1 .textarea_wrapper .fa {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    color: #c2c2c2;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #c2c2c2;
+}
+
+@media (max-width: 991px) {
+    .form1 .textarea_wrapper {
+        margin-bottom: 30px;
+    }
+}
