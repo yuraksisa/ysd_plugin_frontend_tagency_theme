@@ -17,15 +17,89 @@ module YsdPluginFrontendTagencyTheme
     def install(context={})
 
       SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider1_img_bg'},
-                                                    {:value => '.',
+                                                    {:value => '',
                                                      :description => 'Slider1 background image path',
-                                                     :module => :frontend_rentit_theme})
+                                                     :module => :frontend_tagency_theme})
 
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider1_text_1'},
+                                                    {:value => '',
+                                                     :description => 'Slider1 text 1',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider1_text_2'},
+                                                    {:value => '',
+                                                     :description => 'Slider1 text 2',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider1_text_3'},
+                                                    {:value => '',
+                                                     :description => 'Slider1 text 3',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_img_bg'},
+                                                    {:value => '',
+                                                     :description => 'Slider2 background image path',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_text_1'},
+                                                    {:value => '',
+                                                     :description => 'Slider2 text 1',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_text_2'},
+                                                    {:value => '',
+                                                     :description => 'Slider2 text 2',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_text_3'},
+                                                    {:value => '',
+                                                     :description => 'Slider2 text 3',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_img_bg'},
+                                                    {:value => '',
+                                                     :description => 'Slider3 background image path',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_text_1'},
+                                                    {:value => '',
+                                                     :description => 'Slider3 text 1',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_text_2'},
+                                                    {:value => '',
+                                                     :description => 'Slider3 text 2',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_text_3'},
+                                                    {:value => '',
+                                                     :description => 'Slider3 text 3',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_img_bg'},
+                                                    {:value => '',
+                                                     :description => 'Slider4 background image path',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_text_1'},
+                                                    {:value => '',
+                                                     :description => 'Slider4 text 1',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_text_2'},
+                                                    {:value => '',
+                                                     :description => 'Slider4 text 2',
+                                                     :module => :frontend_tagency_theme})
+
+      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_text_3'},
+                                                    {:value => '',
+                                                     :description => 'Slider4 text 3',
+                                                     :module => :frontend_tagency_theme})
 
       SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.css.header_background'},
                                                     {:value => '#fbfbfb',
                                                      :description => 'Slider1 background image path',
-                                                     :module => :frontend_rentit_theme})
+                                                     :module => :frontend_tagency_theme})
 
     end
 

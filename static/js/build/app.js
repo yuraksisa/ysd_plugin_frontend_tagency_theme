@@ -21,7 +21,16 @@ requirejs(['jquery',
            'jquery.smoothscroll',
            'jquery.toast',
            'swiper.jquery',     
-           'bootstrap.select', 
+           'bootstrap.select',
+           // Travel Agency theme - start
+           "select2",
+           "jquery.parallax.resize",
+           "SmoothScroll",
+           "jquery.appear",
+           "jquery.caroufredsel",
+           "jquery.touchSwipe",
+           "jquery.ui.totop",
+           // Travel Agency theme - stop
            'json2', 
            'datejs',
            'YSDAbstractDataSource',         // DataSource

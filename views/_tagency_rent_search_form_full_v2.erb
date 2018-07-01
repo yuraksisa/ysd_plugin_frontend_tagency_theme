@@ -1,40 +1,42 @@
 <!-- Search form -->
 <form name="search_form" class="form1" action="<%=format_url_with_language('/reserva/producto')%>" method="post">
-  <div class="row">
-    <!-- Date from (+ time from) - Date to (+ time to) - pickup/return place -->
-    <% if booking_item_family and booking_item_family.pickup_return_place and booking_item_family.time_to_from %>
+
+  <!-- Date from (+ time from) - Date to (+ time to) - pickup/return place -->
+  <% if booking_item_family and booking_item_family.pickup_return_place and booking_item_family.time_to_from %>
+    <div class="row">
       <div class="col-sm-6">
         <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
-        <div class="select1_wrapper">
-          <label for="pickup_place">
-            <%=t.front_end_reservation.pickup_place%>:
-          </label>
-          <div class="select1_inner">
-            <select name="pickup_place" id="pickup_place" class="select2 select">
-            </select>
+          <div class="select1_wrapper">
+            <label for="pickup_place">
+              <%=t.front_end_reservation.pickup_place%>:
+            </label>
+            <div class="select1_inner">
+              <select name="pickup_place" id="pickup_place" class="select2 select input-price"
+                      data-live-search="true" data-width="100%" data-toggle="tooltip" title="Select" data-container="body">
+              </select>
+            </div>
           </div>
-        </div>
           <% if pickup_return_places_configuration == 'list+custom'%>
-          <div id="another_pickup_place_group" class="form-group">
+            <div id="another_pickup_place_group" class="form-group">
+              <label for="pickup_place">
+                <%=t.front_end_reservation.pickup_place%>:
+              </label>
+              <div class="textarea_wrapper">
+                <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                <input type="hidden" name="custom_pickup_place" value="false"/>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="form-group">
             <label for="pickup_place">
               <%=t.front_end_reservation.pickup_place%>:
             </label>
             <div class="textarea_wrapper">
               <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
-              <input type="hidden" name="custom_pickup_place" value="false"/>
+              <i class="fa fa-map-marker"></i>
             </div>
           </div>
-          <% end %>
-        <% else %>
-        <div class="form-group">
-          <label for="pickup_place">
-            <%=t.front_end_reservation.pickup_place%>:
-          </label>
-          <div class="textarea_wrapper">
-            <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
-            <i class="fa fa-map-marker"></i>
-          </div>
-        </div>
         <% end %>
       </div>
       <div class="col-sm-3">
@@ -43,7 +45,7 @@
             <%=t.front_end_reservation.date_from%>:
           </label>
           <div class="input1_inner">
-            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy">
+            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
           </div>
         </div>
       </div>
@@ -68,7 +70,7 @@
               <%=t.front_end_reservation.return_place%>:
             </label>
             <div class="select1_inner">
-              <select name="return_place" id="return_place" class="select2 select">
+              <select name="return_place" id="return_place" class="select2 select selectpicker input-price" data-live-search="true" data-width="100%" data-toggle="tooltip" title="Select" data-container="body">
               </select>
             </div>
           </div>
@@ -101,7 +103,7 @@
             <%=t.front_end_reservation.date_to%>:
           </label>
           <div class="input1_inner">
-            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy">
+            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
           </div>
         </div>
       </div>
@@ -116,7 +118,7 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
     <br/>
     <% if driver_partial or promotion_code_partial %>
       <div class="row">
@@ -132,5 +134,161 @@
         <% end %>
       </div>
     <% end %>
+  <% elsif booking_item_family and booking_item_family.pickup_return_place and !booking_item_family.time_to_from %>
+    <div class="row">
+      <div class="col-sm-6">
+        <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+          <div class="select1_wrapper">
+            <label for="pickup_place">
+              <%=t.front_end_reservation.pickup_place%>:
+            </label>
+            <div class="select1_inner">
+              <select name="pickup_place" id="pickup_place" class="select2 select input-price"
+                      data-live-search="true" data-width="100%" data-toggle="tooltip" title="Select" data-container="body">
+              </select>
+            </div>
+          </div>
+          <% if pickup_return_places_configuration == 'list+custom'%>
+            <div id="another_pickup_place_group" class="form-group">
+              <label for="pickup_place">
+                <%=t.front_end_reservation.pickup_place%>:
+              </label>
+              <div class="textarea_wrapper">
+                <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                <input type="hidden" name="custom_pickup_place" value="false"/>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="form-group">
+            <label for="pickup_place">
+              <%=t.front_end_reservation.pickup_place%>:
+            </label>
+            <div class="textarea_wrapper">
+              <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+              <i class="fa fa-map-marker"></i>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_from">
+            <%=t.front_end_reservation.date_from%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+            <input id="time_from" name="time_from" type="hidden" value="<%=booking_item_family.time_start%>"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-sm-6">
+        <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+          <div class="select1_wrapper">
+            <label for="return_place">
+              <%=t.front_end_reservation.return_place%>:
+            </label>
+            <div class="select1_inner">
+              <select name="return_place" id="return_place" class="select2 select selectpicker input-price" data-live-search="true" data-width="100%" data-toggle="tooltip" title="Select" data-container="body">
+              </select>
+            </div>
+          </div>
+          <% if pickup_return_places_configuration == 'list+custom'%>
+            <div id="another_return_place_group" class="form-group">
+              <label for="return_place_other">
+                <%=t.front_end_reservation.return_place%>:
+              </label>
+              <div class="textarea_wrapper">
+                <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                <input type="hidden" name="custom_pickup_place" value="false"/>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <div class="form-group">
+            <label for="return_place_other">
+              <%=t.front_end_reservation.return_place%>:
+            </label>
+            <div class="textarea_wrapper">
+              <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+              <i class="fa fa-map-marker"></i>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_to">
+            <%=t.front_end_reservation.date_to%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+            <input id="time_to" name="time_to" type="hidden" value="<%=booking_item_family.time_end%>"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <% if driver_partial or promotion_code_partial %>
+      <div class="row">
+        <% if driver_partial %>
+          <div class="col-sm-6">
+            <%= driver_partial %>
+          </div>
+        <% end %>
+        <% if promotion_code_partial %>
+          <div class="col-sm-6">
+            <%= promotion_code_partial %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+  <% elsif booking_item_family and !booking_item_family.pickup_return_place and !booking_item_family.time_to_from %>
+    <div class="row">
+      <div class="<% if !driver_partial and !promotion_code_partial%>col-sm-offset-3<%elsif !driver_partial or !promotion_code_partial%>col-sm-offset-1<%end%> col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_from">
+            <%=t.front_end_reservation.date_from%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+            <input id="time_from" name="time_from" type="hidden" value="<%=booking_item_family.time_start%>"/>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_to">
+            <%=t.front_end_reservation.date_to%>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+            <input id="time_to" name="time_to" type="hidden" value="<%=booking_item_family.time_end%>"/>
+          </div>
+        </div>
+      </div>
+      <% if driver_partial %>
+        <div class="col-sm-3">
+          <%= driver_partial %>
+        </div>
+      <% end %>
+      <% if promotion_code_partial %>
+        <div class="col-sm-3">
+          <%= promotion_code_partial %>
+        </div>
+      <% end %>
+    </div>
+    <br/>
   <% end %>
+  <div class="row">
+    <div class="col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
+      <div class="button1_wrapper">
+        <button type="button" id="formSearchSubmit" class="btn-default btn-form1-submit"><%=t.front_end_reservation.search_button%></button>
+      </div>
+    </div>
+  </div>
 </form>

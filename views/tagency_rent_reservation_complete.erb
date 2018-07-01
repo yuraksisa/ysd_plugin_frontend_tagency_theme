@@ -1,199 +1,341 @@
-        <!-- PAGE WITH SIDEBAR -->
-        <section class="with-sidebar sub-page">
-                <div class="row">
-                    <!-- CONTENT -->
-                    <div class="col-md-8 content car-listing" id="content" style="display: none">
-                        <!-- Product -->
-                        <div id="selected_product">
-                        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-                        <hr class="page-divider half transparent"/>
+      <!-- Product -->
+      <div id="selected_product">
+      </div>
 
-                        <!-- Extras -->
-                        <div id="extras_container" style="display:none">
-                          <h3 class="block-title alt"><i class="fa"></i><%=t.front_end_reservation.extras_title%></h3>
-                          <form role="form" class="form-extras">
+      <div class="clearfix"></div>
+      <div class="col-md-7 booking-row">
 
-                              <div class="row">
+        <form id="form-reservation" name="reservation_form" class="form-delivery" method="post">
+          <input type="hidden" name="customer_language" value="<%=session[:locale]%>"/>
 
-                                  <div class="col-md-6">
-                                      <div class="left">
-                                          <div id="extras_listing">
-                                          </div>
-                                      </div>
-                                  </div>
+          <h3 class="line"><%=t.front_end_reservation.customer_title%></h3>
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_name%>*</label>
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="customer_name" id="customer_name" title="<%=t.front_end_reservation.field_customer_name_mandatory%>" data-toggle="tooltip"
+                     class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_name%>:*" spellcheck="false" autocomplete="off">
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-                              </div>
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_surname%>*</label>
 
-                          </form>
-                        </div>
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="customer_surname" id="customer_surname" title="<%=t.front_end_reservation.field_customer_surname_mandatory%>" data-toggle="tooltip"
+                     class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_surname%>:*" spellcheck="false" autocomplete="off">
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-                        <!-- Customer -->
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_email%>*</label>
 
-                        <h3 class="block-title alt"><i class="fa"></i><%=t.front_end_reservation.customer_title%></h3>
-                        <form id="form-reservation" name="reservation_form" class="form-delivery" method="post">
-                            <input type="hidden" name="customer_language" value="<%=session[:locale]%>"/>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input name="customer_name" id="customer_name" title="<%=t.front_end_reservation.field_customer_name_mandatory%>" data-toggle="tooltip"
-                                                class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_name%>:*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <input name="customer_surname" id="customer_surname" title="<%=t.front_end_reservation.field_customer_surname_mandatory%>" data-toggle="tooltip"
-                                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_surname%>:*">
-                                  </div>
-                                </div>
-                                <div class="col-md-6 clearfix">
-                                    <div class="form-group">
-                                        <input name="customer_email" id="customer_email" title="<%=t.front_end_reservation.field_customer_email_mandatory%>" data-toggle="tooltip"
-                                                class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_email%>:*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <input name="confirm_customer_email" id="confirm_customer_email" title="<%=t.front_end_reservation.field_customer_email_mandatory%>" data-toggle="tooltip"
-                                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_email_confirm%>:*">
-                                  </div>
-                                </div>
-                                <div class="col-md-6 clearfix">
-                                    <div class="form-group">
-                                     <input name="customer_phone" class="form-control alt" type="text"
-                                            placeholder="<%=t.front_end_reservation.field_customer_main_phone_number%>:*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                      <input name="customer_mobile_phone" class="form-control alt" type="text"
-                                             placeholder="<%=t.front_end_reservation.field_customer_alternative_phone_number%>:">
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="customer_email" id="customer_email" title="<%=t.front_end_reservation.field_customer_email_mandatory%>" data-toggle="tooltip"
+                     class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_email%>:*" spellcheck="false" autocomplete="off">
 
-                        <!-- Additional information -->
-                        <h3 class="block-title alt"><i class="fa"></i><%=t.front_end_reservation.additional_information_title%></h3>
-                        <form action="#" class="form-additional">
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="form-group">
-                                  <textarea name="comments" id="comments"
-                                     class="form-control alt" placeholder="<%=t.front_end_reservation.field_comments%>" cols="30" rows="10"></textarea>
-                              </div>
-                            </div>
-                          </div>
-                        </form>
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-                        <!-- Payment -->
-                        <div id="payment_detail">
-                        </div>  
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_email_confirm%>*</label>
 
-                        <!-- Reservation buttons -->
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="confirm_customer_email" id="confirm_customer_email" title="<%=t.front_end_reservation.field_customer_email_mandatory%>" data-toggle="tooltip"
+                     class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_customer_email_confirm%>:*" spellcheck="false" autocomplete="off">
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-                        <div class="overflowed reservation-now">
-                            <div>
-                              <div class="checkbox pull-left">
-                                <input id="accept" type="checkbox" name="accept" title="Please accept" data-toggle="tooltip" value="checked">
-                                <label for="accept"><%=t.front_end_reservation.conditions_read(format_url_with_language("/renting_conditions"))%></label>
-                              </div>
-                              <a id="btn_reservation" class="btn btn-theme pull-right btn-reservation-now" href="#"><%=t.front_end_reservation.request_reservation%></a>
-                            </div>
-                        </div>
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_main_phone_number%>*</label>
 
-                        <div id="reservation_error" class="alert alert-danger" style="display:none">
-                        </div>
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="customer_phone" class="form-control alt" type="text"
+                     placeholder="<%=t.front_end_reservation.field_customer_main_phone_number%>:*" spellcheck="false" autocomplete="off">
 
-                    </div>
-                    <!-- /CONTENT -->
+            </div>
+          </div>
+          <div class="clearfix"></div>
 
-                    <!-- SIDEBAR -->
-                    <aside class="col-md-4 sidebar" id="sidebar">
-                        <div class="widget shadow widget-details-reservation">
-                            <div id="reservation_detail">
-                            </div>
-                        </div>
-                        <!--div class="widget shadow widget-helping-center" style="display:none">
-                            <h4 class="widget-title">Atención al cliente</h4>
-                            <div class="widget-content">
-                                <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros.</p>
-                                <h5 class="widget-title-sub">+34 666 10 10 10</h5>
-                                <p><a href="mailto:support@supportcenter.com">support@mybooking.es</a></p>
-                                <div class="button">
-                                    <a href="#" class="btn btn-block btn-theme btn-theme-dark">Centro de soporte</a>
-                                </div>
-                            </div>
-                        </div-->
-                    </aside>
-                    <!-- /SIDEBAR -->
+          <div class="input2_wrapper">
+            <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_customer_alternative_phone_number%></label>
 
-                </div>
-        </section>
-        <!-- /PAGE WITH SIDEBAR -->
+            <div class="col-md-7" style="padding-right:0;padding-left:0;">
+              <input name="customer_mobile_phone" class="form-control alt" type="text"
+                     placeholder="<%=t.front_end_reservation.field_customer_alternative_phone_number%>:"  spellcheck="false" autocomplete="off">
+            </div>
+          </div>
+          <div class="clearfix"></div>
+
+          <% if booking_item_family.driver_license %>
+          <h3 class="line"><%=t.front_end_reservation.summary_page.customer_address%></h3>
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_street%></label>
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="street" id="street" title="<%=t.front_end_reservation.field_driver_address_street%>" data-toggle="tooltip"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_street%>:" maxlength="60" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_number%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="number" id="number" title="<%=t.front_end_reservation.field_driver_address_number%>" data-toggle="tooltip"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_number%>:"  maxlength="10" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_complement%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="complement" id="complement" title="<%=t.front_end_reservation.field_driver_address_complement%>" data-toggle="tooltip"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_complement%>:"  maxlength="20" spellcheck="false" autocomplete="off">
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input1_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_city%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="city" id="city" title="<%=t.front_end_reservation.field_driver_address_city%>" data-toggle="tooltip"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_city%>:"  maxlength="60" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_state%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="state" id="state" class="form-control alt" type="text"
+                       placeholder="<%=t.front_end_reservation.field_driver_address_state%>:" maxlength="60" spellcheck="false" autocomplete="off">
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input1_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_country%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="country" id="country" class="form-control alt" type="text"
+                       placeholder="<%=t.front_end_reservation.field_driver_address_country%>:"  maxlength="50" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_zip%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="zip" id="zip" class="form-control alt" type="text"
+                       placeholder="<%=t.front_end_reservation.field_driver_address_zip%>:"  maxlength="10" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          <% end %>
+
+          <% if booking_item_family.driver_license %>
+          <h3 class="line"><%=t.front_end_reservation.fieldset_driver%></h3>
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_name%></label>
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_name" id="driver_name"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_name%>:" maxlength="40" spellcheck="false" autocomplete="off" >
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_surname%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_surname" id="driver_surname"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_surname%>:" maxlength="40" spellcheck="false" autocomplete="off" >
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_document_id%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_document_id" id="driver_document_id"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_document_id%>:" maxlength="50" spellcheck="false" autocomplete="off" >
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input1_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_date_of_birth%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_date_of_birth" id="driver_date_of_birth"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_date_of_birth%>:" maxlength="10" spellcheck="false" autocomplete="off" >
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_number%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_driving_license_number" id="driver_driving_license_number"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_number%>:" maxlength="50" spellcheck="false" autocomplete="off" >
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input1_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_date%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_driving_license_date" id="driver_driving_license_date"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_date%>:" maxlength="10" spellcheck="false" autocomplete="off" >
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_country%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="driver_driving_license_country" id="driver_driving_license_country"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_country%>:" maxlength="80" spellcheck="false" autocomplete="off" >
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          <% end %>
+
+          <% if booking_item_family.flight %>
+          <h3 class="line"><%=t.front_end_reservation.fieldset_flight%></h3>
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_company%></label>
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="flight_company" id="flight_company"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_company%>:" maxlength="80" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_number%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="flight_number" id="flight_number"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_number%>:" maxlength="10" spellcheck="false" autocomplete="off">
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="input2_wrapper">
+              <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_time%></label>
+
+              <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                <input name="flight_time" id="flight_time"
+                       class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_time%>:" maxlength="5">
+
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          <% end %>
+
+        </form>
+
+        <div class="clearfix"></div>
+
+        <h3 class="line"><%=t.front_end_reservation.additional_information_title%></h3>
+        <form action="#" class="form-horizontal">
+          <div class="input2_wrapper">
+            <label class="col-md-12" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_comments%></label>
+            <div class="col-md-12" style="padding-right:0;padding-left:0;">
+              <textarea name="comments" id="comments"
+                        class="form-control" rows="10" style="height: auto"></textarea>
+            </div>
+          </div>
+        </form>
+
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4 booking-row">
+
+        <div id="reservation_detail">
+        </div>
+
+        <div class="margin-top" style="margin-top:40px;"></div>
+        <div class="border-3px"></div>
+        <div class="clearfix"></div>
+
+        <div class="margin-top"></div>
+        <!--h3>ACCEPT AND CONFIRM</h3-->
+        <input type="checkbox" id="accept"> <b style="color:#464646;padding-left:10px;"><%=t.front_end_reservation.conditions_read(format_url_with_language("/renting_conditions"))%></b>
+
+        <div class="margin-top"></div>
+        <div class="clearfix"></div>
+
+        <a id="btn_reservation" href="#" class="btn btn-default btn-cf-submit3"><%=t.front_end_reservation.request_reservation%></a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <script type="text/tpml" id="script_product_detail">
 
-  <h3 class="block-title alt">
-    <i class="fa"></i><%=t.front_end_reservation.product_information_title%>
-  </h3>
-  <div class="car-big-card alt">
-    <div class="row">
-      <div class="col-md-8">
-        <div class="item">
-          <img class="img-responsive" src="<%%=product.full_photo%>" alt=""/>
-        </div>
+      <div class="blog_content">
+          <div class="post post-full">
+              <h3 class="text-center hch2"><%%=product.name%></h3>
+              <div class="clearfix"></div>
+              <div class="post-header">
+                  <img class="img-responsive" src="<%%=product.full_photo%>" alt="" style="margin: 0 auto; display: block"/>
+                  <div class="price text-right">
+                     <%% if (product.base_price != product.price) { %>
+                       <span style="text-decoration:line-through; text-color: black"><%%=new Number(product.base_price).toFixed(2)%>€</span>
+                     <%% } %>
+                       <strong><%%=new Number(shopping_cart.item_cost).toFixed(2)%></strong>€
+                  </div>
+              </div>
+          </div>
       </div>
-      <div class="col-md-4">
-        <div class="car-details">
-           <div class="list">
-              <ul>
-                <li class="title">
-                  <h2><%%=product.name%></h2>
-                </li>
-                <%%=product.description%>
-              </ul>
-           </div>
-           <div class="price">
-              <%% if (product.base_price != product.price) { %><span style="text-decoration:line-through; text-color: black"><%%=new Number(product.base_price).toFixed(2)%>€</span><%% } %><strong><%%=new Number(shopping_cart.item_cost).toFixed(2)%></strong>€
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
 
 </script>
 
 <script type="text/tpml" id="script_products_detail">
 
-  <h3 class="block-title alt">
-    <i class="fa"></i><%=t.front_end_reservation.products_information_title%>
-  </h3>
   <%% for (var idx=0; idx<shopping_cart.items.length; idx++) { %>
-  <div class="car-big-card alt">
-    <div class="row">
-      <div class="col-md-5">
-        <div class="car-details">
-           <div class="list">
-              <ul>
-                <li class="title">
-                  <h2><%%=shopping_cart.items[idx].quantity%> x <%%=products[shopping_cart.items[idx].item_id].name%></h2>
-                </li>
-                <%%=products[shopping_cart.items[idx].item_id].description%>
-              </ul>
-           </div>
-           <div class="price">
-              <%% if (shopping_cart.items[idx].item_unit_cost_base != shopping_cart.items[idx].item_unit_cost) { %><span style="text-decoration:line-through; text-color: black"><%%=new Number(shopping_cart.items[idx].item_unit_cost_base*shopping_cart.items[idx].quantity).toFixed(2)%>€</span><%% } %><strong><%%=new Number(shopping_cart.items[idx].item_cost).toFixed(2)%></strong>€ <i class="fa fa-info-circle"></i>
-           </div>
-         </div>
-       </div>
-       <div class="col-md-7">
-        <div class="item">
-          <img class="img-responsive" src="<%%=products[shopping_cart.items[idx].item_id].full_photo%>" alt=""/>
-        </div>
+
+      <div class="blog_content">
+          <div class="post post-full">
+              <h3 class="text-center hch2"><%%=shopping_cart.items[idx].quantity%> x <%%=products[shopping_cart.items[idx].item_id].name%></h3>
+              <div class="clearfix"></div>
+              <div class="post-header">
+                  <img class="img-responsive" src="<%%=products[shopping_cart.items[idx].item_id].full_photo%>" alt="" style="margin: 0 auto; display: block"/>
+                  <div class="price text-right">
+                      <%% if (shopping_cart.items[idx].item_unit_cost_base != shopping_cart.items[idx].item_unit_cost) { %>
+                        <span style="text-decoration:line-through; text-color: black"><%%=new Number(shopping_cart.items[idx].item_unit_cost_base*shopping_cart.items[idx].quantity).toFixed(2)%>€</span>
+                      <%% } %>
+                        <strong><%%=new Number(shopping_cart.items[idx].item_cost).toFixed(2)%></strong>€
+                  </div>
+              </div>
+          </div>
       </div>
-     </div>
-   </div>
+
    <%% } %>
 
 </script>
@@ -232,89 +374,147 @@
 <!-- Script used to render the reservation summary -->
 
 <script type="text/tmpl" id="script_reservation_summary">
-  <span></span>
-  <h4 class="widget-title"><%=t.front_end_reservation.reservation_summary_title%></h4>
-  <div class="widget-content">
-     <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_pickup%></h5>
-     <div class="media">
-        <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
-        <div class="media-body"><p><%%=shopping_cart.date_from_full_format%><% if booking_item_family and booking_item_family.time_to_from %> / <%%=shopping_cart.time_from%><%end%></p></div>
-     </div>
-     <% if booking_item_family and booking_item_family.pickup_return_place %>
-     <div class="media">
-        <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
-        <div class="media-body"><p><%%=shopping_cart.pickup_place_customer_translation%></p></div>
-     </div>
-     <% end %>
-     <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_return%></h5>
-     <div class="media">
-       <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
-       <div class="media-body"><p><%%=shopping_cart.date_to_full_format%><% if booking_item_family and booking_item_family.time_to_from %> / <%%=shopping_cart.time_to%><%end%></p></div>
-     </div>
-     <% if booking_item_family and booking_item_family.pickup_return_place %>
-     <div class="media">
-       <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
-       <div class="media-body"><p><%%=shopping_cart.return_place_customer_translation%></p></div>
-     </div>
-     <% end %>
-     <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_price%></h5>
-     <div class="list">
-        <ul>
-          <li><%=t.front_end_reservation.reservation_summary_total_product%>: <span class="pull-right"><%%=new Number(shopping_cart.item_cost).toFixed(2)%>€</span></li>
 
-          <%% if (shopping_cart.extras_cost > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_total_extras%>: <span class="pull-right"><%%=new Number(shopping_cart.extras_cost).toFixed(2)%>€</span></li>
-          <%% } %>
+        <h3 class="line"><%=t.front_end_reservation.reservation_summary_title%></h3>
 
-          <%% if (shopping_cart.time_from_cost > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_pickup_time_supplement%>: <span class="pull-right"><%%=new Number(shopping_cart.time_from_cost).toFixed(2)%>€</span></li>
-          <%% } %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_from%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=shopping_cart.date_from_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_from%><%end%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
 
-          <%% if (shopping_cart.pickup_place_cost > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_pickup_place_supplement%>: <span class="pull-right"><%%=new Number(shopping_cart.pickup_place_cost).toFixed(2)%>€</span></li>
-          <%% } %>
+        <% if booking_item_family and booking_item_family.pickup_return_place %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.pickup_place%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=shopping_cart.pickup_place_customer_translation%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
 
-          <%% if (shopping_cart.time_to_cost > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_return_time_supplement%>: <span class="pull-right"><%%=new Number(shopping_cart.time_to_cost).toFixed(2)%>€</span></li>
-          <%% } %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_to%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=shopping_cart.date_to_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_to%><%end%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
 
-          <%% if (shopping_cart.return_place_cost > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_return_place_supplement%>: <span class="pull-right"><%%=new Number(shopping_cart.return_place_cost).toFixed(2)%>€</span></li>
-          <%% } %>
+        <% if booking_item_family and booking_item_family.pickup_return_place %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.return_place%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=shopping_cart.return_place_customer_translation%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
 
-          <% if total_cost_includes_deposit %>
+        <div class="margin-top"></div>
+        <h3><%=t.front_end_reservation.reservation_summary_price%></h3>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_product%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.item_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <%% if (shopping_cart.extras_cost > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_extras%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.extras_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+
+        <%% if (shopping_cart.time_from_cost > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_time_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.time_from_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+
+        <%% if (shopping_cart.pickup_place_cost > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_place_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.pickup_place_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+
+        <%% if (shopping_cart.time_to_cost > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_time_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.time_to_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+
+        <%% if (shopping_cart.return_place_cost > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_place_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.return_place_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+
+        <% if total_cost_includes_deposit %>
+        <%% if (shopping_cart.total_deposit > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
+        <% end %>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="red"><%%=new Number(shopping_cart.total_cost).toFixed(2)%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+        <% if !total_cost_includes_deposit %>
           <%% if (shopping_cart.total_deposit > 0) { %>
-          <li><%=t.front_end_reservation.reservation_summary_deposit%>*: <span class="pull-right"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span></li>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="red"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
           <%% } %>
-          <% end %>
-
-          <li><%=t.front_end_reservation.reservation_summary_total%>: <span class="pull-right"><%%=new Number(shopping_cart.total_cost).toFixed(2)%>€</span></li>
-
-          <% if !total_cost_includes_deposit %>
-          <%% if (shopping_cart.total_deposit > 0) { %>
-          <hr>
-          <li><%=t.front_end_reservation.reservation_summary_deposit%>*: <span class="pull-right"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span></li>
-          <%% } %>
-          <% end %>
+        <% end %>
 
 
-          <%% if (shopping_cart.total_deposit > 0) { %>
-          <li><small>* <%=t.front_end_reservation.reservation_summary_deposit_detail%></small></li>
-          <%% } %>
+        <%% if (shopping_cart.total_deposit > 0) { %>
+        <div class="input2_wrapper">
+          <label class="col-md-12" style="padding-left:0;padding-top:12px;"><small>* <%=t.front_end_reservation.reservation_summary_deposit_detail%></small></label>
+        </div>
+        <div class="clearfix"></div>
+        <%% } %>
 
-        </ul>
-     </div>
-
-     <% if booking_item_family.driver and booking_driver_min_age_rules %>
-     <div>
-       <hr>
-       <span><strong><%%=shopping_cart.driver_age_rule_description_customer_translation%></strong></span>
-     </div>
-     <% end %>
-
-     <div class="button">
-       <a href="/reserva/producto" class="btn btn-block btn-theme btn-theme-dark"><%=t.front_end_reservation.modify_the_reservation%></a>
-     </div>
   </div>
 </script>
 

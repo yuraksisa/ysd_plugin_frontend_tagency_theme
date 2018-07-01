@@ -24,7 +24,16 @@ requirejs.config({
         "datejs"                  : "datejs",
         "ysdtemplate"             : "ysdtemplate",
         "async"                   : "async",
-        "jquery.toast"            : "jquery.toast"
+        "jquery.toast"            : "jquery.toast",
+        // Travel agency theme - start
+        "select2"                 : "select2",
+        "jquery.parallax.resize"  : "jquery.parallax.resize",
+        "SmoothScroll"            : "SmoothScroll",
+        "jquery.appear"           : "jquery.appear",
+        "jquery.caroufredsel"     : "jquery.caroufredsel",
+        "jquery.touchSwipe"       : "jquery.touchSwipe",
+        "jquery.ui.totop"         : "jquery.ui.totop"
+        // Travel agency theme - end
     },
 
     shim: {
@@ -43,6 +52,15 @@ requirejs.config({
         "jquery.smoothscroll" : ['jquery'],
         "jquery.toast": ['jquery'],
         "swiper.jquery": ['jquery'],
+        // Travel Agency theme - start
+        "select2" : ['jquery'],
+        "jquery.parallax.resize" : ['jquery'],
+        "SmoothScroll" : {},
+        "jquery.appear" : ['jquery'],
+        "jquery.caroufredsel" : ['jquery'],
+        "jquery.touchSwipe" : ['jquery'],
+        "jquery.ui.totop" : ['jquery'],
+        // Travel agency theme - end
         "bootstrap.select": ['bootstrap'],
         "json2" : { 
           "exports": 'JSON'
