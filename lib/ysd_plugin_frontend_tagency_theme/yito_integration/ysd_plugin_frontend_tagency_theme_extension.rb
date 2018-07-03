@@ -36,10 +36,6 @@ module YsdPluginFrontendTagencyTheme
                                                      :description => 'Slider1 text 3',
                                                      :module => :frontend_tagency_theme})
 
-      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_img_bg'},
-                                                    {:value => '',
-                                                     :description => 'Slider2 background image path',
-                                                     :module => :frontend_tagency_theme})
 
       SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider2_text_1'},
                                                     {:value => '',
@@ -56,10 +52,6 @@ module YsdPluginFrontendTagencyTheme
                                                      :description => 'Slider2 text 3',
                                                      :module => :frontend_tagency_theme})
 
-      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_img_bg'},
-                                                    {:value => '',
-                                                     :description => 'Slider3 background image path',
-                                                     :module => :frontend_tagency_theme})
 
       SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider3_text_1'},
                                                     {:value => '',
@@ -76,10 +68,6 @@ module YsdPluginFrontendTagencyTheme
                                                      :description => 'Slider3 text 3',
                                                      :module => :frontend_tagency_theme})
 
-      SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_img_bg'},
-                                                    {:value => '',
-                                                     :description => 'Slider4 background image path',
-                                                     :module => :frontend_tagency_theme})
 
       SystemConfiguration::Variable.first_or_create({:name => 'frontend.skin.tagency.slider4_text_1'},
                                                     {:value => '',
@@ -129,6 +117,8 @@ module YsdPluginFrontendTagencyTheme
 
         home_page = SystemConfiguration::Variable.get_value('site.anonymous_front_page')
 
+        is_home_page = (context[:app].request.path_info == home_page or context[:app].request.path_info == '/')
+
         # Builds the primary link menu
         primary_links_menu = Site::Menu.first(name: 'primary_links')
         primary_links_menu_render = self.build_primary_links_menu(primary_links_menu,
@@ -162,8 +152,29 @@ module YsdPluginFrontendTagencyTheme
                             'year' => Date.today.year,
                             'primary_links_menu' => primary_links_menu_render,
                             'secondary_links_menu' => secondary_links_menu_render,
-                            'home' => (context[:app].request.path_info == home_page or context[:app].request.path_info == '/')
+                            'home' => is_home_page
         }
+
+        if is_home_page
+          theme_attributes.merge!({
+                             'slider1_img_bg' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider1_img_bg', nil),
+                             'slider1_text_1' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider1_text_1', nil),
+                             'slider1_text_2' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider1_text_2', nil),
+                             'slider1_text_3' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider1_text_3', nil),
+                             'slider2_img_bg' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider2_img_bg', nil),
+                             'slider2_text_1' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider2_text_1', nil),
+                             'slider2_text_2' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider2_text_2', nil),
+                             'slider2_text_3' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider2_text_3', nil),
+                             'slider3_img_bg' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider3_img_bg', nil),
+                             'slider3_text_1' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider3_text_1', nil),
+                             'slider3_text_2' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider3_text_2', nil),
+                             'slider3_text_3' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider3_text_3', nil),
+                             'slider4_img_bg' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider4_img_bg', nil),
+                             'slider4_text_1' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider4_text_1', nil),
+                             'slider4_text_2' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider4_text_2', nil),
+                             'slider4_text_3' => SystemConfiguration::Variable.get_value('frontend.skin.tagency.slider4_text_3', nil),
+                                 })
+        end
 
         # template
         template_file = File.open (File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'views','tagency_page_render.erb')))
@@ -185,7 +196,7 @@ module YsdPluginFrontendTagencyTheme
     def build_primary_links_menu(menu, request_path, locale, default_locale, multilanguage_site)
 
       start_menu    = "<ul class=\"nav navbar-nav sf-menu clearfix\">"
-      start_submenu = "<li class=\"sub-menu sub-menu-1\"><a href=\"<%=branch[:link_route]%>\" title=\"branch[:description]\"><%=branch[:title]%></a><ul>"
+      start_submenu = "<li class=\"sub-menu sub-menu-1\"><a href=\"#\" title=\"<%=branch[:description]%>\"><%=branch[:title]%><em></em></a><ul>"
       menu_item     = "<li id=\"menu_item_<%=leaf[:id]%>\"><a href=\"<%=leaf[:link_route]%>\"><%=leaf[:title]%></a></li>"
       selected_menu_item = "<li id=\"menu_item_<%=leaf[:id]%>\" class=\"active\"><a href=\"<%=leaf[:link_route]%>\"><%=leaf[:title]%></a></li>"
       end_submenu   = "</ul></li>"
@@ -203,7 +214,7 @@ module YsdPluginFrontendTagencyTheme
 
     def build_secondary_links_menu(menu, request_path, locale, default_locale, multilanguage_site)
 
-      start_menu    = "<ul>"
+      start_menu    = "<ul class=\"ul1\">"
       start_submenu = "<li><a href=\"<%=branch[:link_route]%>\" title=\"branch[:description]\"><%=branch[:title]%></a><ul>"
       menu_item     = "<li id=\"menu_item_<%=leaf[:id]%>\"><a href=\"<%=leaf[:link_route]%>\"><%=leaf[:title]%></a></li>"
       selected_menu_item = nil

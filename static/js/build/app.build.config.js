@@ -25,8 +25,8 @@ requirejs.config({
         "ysdtemplate"             : "ysdtemplate",
         "async"                   : "async",
         "jquery.toast"            : "jquery.toast",
-        // Travel agency theme - start
         "select2"                 : "select2",
+        // Travel agency theme - start
         "jquery.parallax.resize"  : "jquery.parallax.resize",
         "SmoothScroll"            : "SmoothScroll",
         "jquery.appear"           : "jquery.appear",
@@ -52,8 +52,8 @@ requirejs.config({
         "jquery.smoothscroll" : ['jquery'],
         "jquery.toast": ['jquery'],
         "swiper.jquery": ['jquery'],
-        // Travel Agency theme - start
         "select2" : ['jquery'],
+        // Travel Agency theme - start
         "jquery.parallax.resize" : ['jquery'],
         "SmoothScroll" : {},
         "jquery.appear" : ['jquery'],

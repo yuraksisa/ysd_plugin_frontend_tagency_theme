@@ -1,452 +1,731 @@
-<!-- PAGE WITH SIDEBAR -->
-<section class="with-sidebar sub-page">
-    <div class="row">
-      <div class="col-md-12">
-        <h3><%=@booking.customer_name%> <%=@booking.customer_surname%>, <strong><%=t.front_end_reservation.booking_detail_title("#{t[:front_end_reservation][:booking_detail_state][@booking.status.to_sym]}").to_s.downcase%></strong></h3>
-        <br/>
-      </div>
-    </div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-    <div class="row">
-      <!-- CONTENT -->
-      <div class="col-md-8 content car-listing" id="content">
+      <!-- Product(s) -->
+      <h2 style="font-size: 1.8em; color: #1cbbb4"><%=@booking.customer_name%> <%=@booking.customer_surname%>, <strong><%=t.front_end_reservation.booking_detail_title("#{t[:front_end_reservation][:booking_detail_state][@booking.status.to_sym]}").to_s.downcase%></strong></h2>
 
-        <!-- PRODUCT(S) INFORMATION -->
-        <h3 class="block-title alt">
-          <i class="fa"></i><%=t.front_end_reservation.booking_detail_product_title%>
-        </h3>
-
-        <% @booking.booking_lines.each do |booking_item| %>
+      <% @booking.booking_lines.each do |booking_item| %>
         <% product = ::Yito::Model::Booking::BookingCategory.get(booking_item.item_id) %>
-        <div class="car-big-card alt">
-          <div class="row">
-            <div class="col-md-12">
-              <div>
-                <div class="item">
-                  <img class="img-responsive" style="display: block; margin: 0 auto;" src="<%= product.photo_url_full %>" alt=""/>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-12">
-              <div class="car-details">
-                <div class="block-title">
-                  <h3><%=booking_item.item_description_customer_translation%></h3>
-                </div>
-                <div class="price">
-                  <%if booking_item.quantity > 1%>
-                      <small><%=booking_item.quantity%> x <span style="text-decoration:line-through; text-color: black"><%='%.2f' % booking_item.item_unit_cost_base%></span> <%='%.2f' % booking_item.item_unit_cost%>€</small> &nbsp; &nbsp;
-                  <% end %>
-                  <% if booking_item.item_unit_cost != booking_item.item_unit_cost_base%>
-                      <span style="text-decoration:line-through; text-color: black"><%= "%.2f" % (booking_item.item_unit_cost_base * booking_item.quantity)%>€</span>
-                  <%end%>
-                  <strong><%='%.2f' % booking_item.item_cost%></strong>€ <i class="fa fa-info-circle"></i>
-                </div>
+        <div class="blog_content">
+          <div class="post post-full">
+            <h3 class="text-center hch2" style="font-size: 1.4em">
+              <%=booking_item.quantity%> x <%=booking_item.item_description_customer_translation%>
+            </h3>
+            <div class="clearfix"></div>
+            <div class="post-header">
+              <img class="img-responsive" src="<%= product.photo_url_full %>" alt="" style="margin: 0 auto; display: block"/>
+              <div class="price text-right">
+                <% if booking_item.item_unit_cost != booking_item.item_unit_cost_base%>
+                  <span style="text-decoration:line-through; text-color: black"><%= "%.2f" % (booking_item.item_unit_cost_base * booking_item.quantity)%>€</span>
+                <%end%>
+                <strong><%='%.2f' % booking_item.item_cost%></strong>€
               </div>
             </div>
           </div>
         </div>
-        <% end %>
-        <hr class="page-divider half transparent"/>
-        <!--/PRODUCT(S) INFORMATION -->
+      <% end %>
 
-        <!--EXTRAS INFORMATION -->
-        <% if @booking.booking_extras.size > 0 %>
-        <h3 class="block-title alt">
-          <i class="fa"></i><%=t.front_end_reservation.booking_detail_extras_title%>
-        </h3>
-        <div class="car-big-card alt">
-          <div class="row">
-            <% @booking.booking_extras.each do |booking_extra| %>
-            <div class="col-md-12">
-               <div class="car-details">
-                  <div class="block-title">
-                     <h4><%=booking_extra.extra_description_customer_translation%></h4>
-                  </div>
-                  <div class="price">
-                    <%if booking_extra.quantity > 1%>
-                    <small><%=booking_extra.quantity%> x <%='%.2f' % booking_extra.extra_unit_cost%>€</small> &nbsp; &nbsp;
-                    <% end %>
-                    <strong><%='%.2f' % booking_extra.extra_cost%></strong>€ <i class="fa fa-info-circle"></i>
-                  </div>
-               </div>
-            </div>
-            <% end %>
+      <div class="clearfix"></div>
+
+      <!-- Complete information -->
+      <div class="col-md-7 booking-row">
+
+        <!-- Customer information (Not editable) -->
+        <h3 class="line"><%=t.front_end_reservation.booking_detail_customer_title%></h3>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.booking_detail_customer_name%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%=@booking.customer_name%> <%=@booking.customer_surname%></span>
           </div>
         </div>
-        <hr class="page-divider half transparent"/>
-        <% end %>
+        <div class="clearfix"></div>
 
-        <!-- CUSTOMER INFORMATION -->
-        <h3 class="block-title alt">
-          <i class="fa"></i><%=t.front_end_reservation.booking_detail_customer_title%>
-        </h3>
-
-        <div class="form-delivery">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="form-control alt">
-                  <strong><%=t.front_end_reservation.booking_detail_customer_name%></strong>
-                  <div><%=@booking.customer_name%> <%=@booking.customer_surname%></div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="form-control alt">
-                  <strong><%=t.front_end_reservation.booking_detail_customer_email%></strong>
-                  <p><%=@booking.customer_email%></p>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="form-group">
-                <div class="form-control alt">
-                  <strong><%=t.front_end_reservation.booking_detail_customer_phone_number%></strong>
-                  <p><%=@booking.customer_phone%> <%=@booking.customer_mobile_phone%></p>
-                </div>
-              </div>
-            </div>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.booking_detail_customer_email%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%=@booking.customer_email%></span>
           </div>
         </div>
-        <!--/CUSTOMER INFORMATION -->
+        <div class="clearfix"></div>
 
-        <!-- EXTRA DATA -->
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.booking_detail_customer_phone_number%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%=@booking.customer_phone%> <%=@booking.customer_mobile_phone%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <!-- Customer extra information (Editable) -->
+
         <% if @booking_item_family.driver or @booking_item_family.named_resources or @booking_item_family.height or
-              @booking_item_family.weight %>
+            @booking_item_family.weight %>
+          <div class="margin-top"></div>
+          <br>
           <div class="alert alert-warning">
             <p><%=t.front_end_reservation.summary_page.fill_data_message%></p>
           </div>
           <form name="booking_information_form" id="booking_information_form" name="order_form" class="form-delivery" method="post">
+
             <% if @booking_item_family.driver %>
-              <h3 class="block-title alt"> <i class="fa"></i><%=t.front_end_reservation.summary_page.customer_address%></h3>
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input name="customer_address[street]" id="street" title="Calle" data-toggle="tooltip"
-                           class="form-control alt" type="text" placeholder="Calle:" maxlength="60"
-                           value="<%=@booking.driver_address ? @booking.driver_address.street : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input name="customer_address[number]" id="number" title="Número" data-toggle="tooltip"
-                           class="form-control alt" type="text" placeholder="Número:"  maxlength="10"
-                           value="<%=@booking.driver_address ? @booking.driver_address.number : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-6 clearfix">
-                  <div class="form-group">
-                    <input name="customer_address[complement]" id="complement" title="Complemento (piso y puerta)" data-toggle="tooltip"
-                           class="form-control alt" type="text" placeholder="Complemento (piso/puerta):"  maxlength="20"
-                           value="<%=@booking.driver_address ? @booking.driver_address.complement : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <input name="customer_address[city]" id="city" title="Ciudad" data-toggle="tooltip"
-                           class="form-control alt" type="text" placeholder="Ciudad:"  maxlength="60"
-                           value="<%=@booking.driver_address ? @booking.driver_address.city : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-6 clearfix">
-                  <div class="form-group">
-                    <input name="customer_address[state]" id="state" class="form-control alt" type="text"
-                           placeholder="Provincia:" maxlength="60"
-                           value="<%=@booking.driver_address ? @booking.driver_address.state : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <input name="customer_address[country]" id="country" class="form-control alt" type="text"
-                           placeholder="País:"  maxlength="50"
-                           value="<%=@booking.driver_address ? @booking.driver_address.country : ''%>">
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <div class="form-group">
-                    <input name="customer_address[zip]" id="zip" class="form-control alt" type="text"
-                           placeholder="Código postal:"  maxlength="10"
-                           value="<%=@booking.driver_address ? @booking.driver_address.zip : ''%>">
-                  </div>
+              <h3 class="line"><%=t.front_end_reservation.summary_page.customer_address%></h3>
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_street%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[street]" id="street" title="<%=t.front_end_reservation.field_driver_address_street%>" data-toggle="tooltip"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_street%>:" maxlength="60"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.street%>"<%end%>>
                 </div>
               </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_number%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[number]" id="number" title="<%=t.front_end_reservation.field_driver_address_number%>" data-toggle="tooltip"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_number%>:"  maxlength="10"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.number%>"<%end%>>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_complement%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[complement]" id="complement" title="<%=t.front_end_reservation.field_driver_address_complement%>" data-toggle="tooltip"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_complement%>:"  maxlength="20"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.complement%>"<%end%>>
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input1_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_city%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[city]" id="city" title="<%=t.front_end_reservation.field_driver_address_city%>" data-toggle="tooltip"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_address_city%>:"  maxlength="60"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.city%>"<%end%>>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_state%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[state]" id="state" class="form-control alt" type="text"
+                         placeholder="<%=t.front_end_reservation.field_driver_address_state%>:" maxlength="60"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.state%>"<%end%>>
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input1_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_country%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[country]" id="country" class="form-control alt" type="text"
+                         placeholder="<%=t.front_end_reservation.field_driver_address_country%>:"  maxlength="50"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.country%>"<%end%>>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_address_zip%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="customer_address[zip]" id="zip" class="form-control alt" type="text"
+                         placeholder="<%=t.front_end_reservation.field_driver_address_zip%>:"  maxlength="10"
+                         spellcheck="false" autocomplete="off"
+                         <% if @booking.driver_address %>value="<%=@booking.driver_address.zip%>"<%end%>>
+                </div>
+              </div>
+              <div class="clearfix"></div>
             <% end %>
+
+            <% if @booking_item_family.driver_license %>
+              <h3 class="line"><%=t.front_end_reservation.fieldset_driver%></h3>
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_name%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_name" id="driver_name"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_name%>:" maxlength="40"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.driver_name%>" >
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_surname%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_surname" id="driver_surname"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_surname%>:" maxlength="40"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.driver_surname%>">
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_document_id%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_document_id" id="driver_document_id"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_document_id%>:" maxlength="50"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.driver_document_id%>">
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input1_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_date_of_birth%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_date_of_birth" id="driver_date_of_birth"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_date_of_birth%>:" maxlength="10"
+                         spellcheck="false" autocomplete="off" >
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_number%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_driving_license_number" id="driver_driving_license_number"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_number%>:" maxlength="50"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.driver_driving_license_number%>">
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input1_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_date%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_driving_license_date" id="driver_driving_license_date"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_date%>:" maxlength="10"
+                         spellcheck="false" autocomplete="off" >
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_driver_driving_license_country%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="driver_driving_license_country" id="driver_driving_license_country"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_driver_driving_license_country%>:" maxlength="80"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.driver_driving_license_country%>">
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            <% end %>
+
+            <% if @booking_item_family.flight %>
+              <h3 class="line"><%=t.front_end_reservation.fieldset_flight%></h3>
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_company%></label>
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="flight_company" id="flight_company"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_company%>:" maxlength="80"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.flight_company%>">
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_number%></label>
+
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="flight_number" id="flight_number"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_number%>:" maxlength="10"
+                         spellcheck="false" autocomplete="off"
+                         value="<%=@booking.flight_number%>">
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <div class="input2_wrapper">
+                <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_flight_time%></label>
+
+                <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                  <input name="flight_time" id="flight_time"
+                         class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.field_flight_time%>:" maxlength="5"
+                         value="<%=@booking.flight_time%>">
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            <% end %>
+
             <% if @booking_item_family.named_resources or @booking_item_family.height or @booking_item_family.weight %>
-              <br>
-              <h3 class="block-title alt"> <i class="fa"></i><%=t.front_end_reservation.summary_page.data_of_the_participants%></h3>
+              <h3 class="line"><%=t.front_end_reservation.summary_page.data_of_the_participants%></h3>
               <% @booking.booking_lines.each do |booking_line| %>
-                  <h4 class="widget-title-sub"><%=booking_line.quantity%> <%=booking_line.item_description%></h4>
-                  <% booking_line.booking_line_resources.each do |booking_line_resource| %>
-                    <h5 class="widget-title"><%=t.front_end_reservation.summary_page.participant%></h5>
-                    <div class="row">
-                      <input type="hidden" name="booking_line_resources[<%=booking_line_resource.id%>][id]" value="<%=booking_line_resource.id%>"/>
-                      <% if @booking_item_family.named_resources %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_name]"  title="Nombre" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Nombre:" maxlength="80"
-                                   value="<%=booking_line_resource.resource_user_name%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_surname]" title="Apellidos" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Apellidos:"  maxlength="80"
-                                   value="<%=booking_line_resource.resource_user_surname%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_document_id]" title="NIF/Pasaporte" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="NIF/Pasaporte:"  maxlength="50"
-                                   value="<%=booking_line_resource.resource_user_document_id%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_phone]" title="Teléfono" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Teléfono:"  maxlength="15"
-                                   value="<%=booking_line_resource.resource_user_phone%>">
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_email]" title="Correo electrónico" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Corro electrónico:"  maxlength="40"
-                                   value="<%=booking_line_resource.resource_user_email%>">
-                          </div>
-                        </div>
-                      <% end %>
-                      <% if @booking_item_family.height %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_height]" title="Altura (en cm)" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Altura: (en cm)"  maxlength="40"
-                                   value="<%=booking_line_resource.customer_height%>">
-                          </div>
-                        </div>
-                      <% end %>
-                      <% if @booking_item_family.weight %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_weight]" title="Peso (en kg)" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Peso: (en kg)"  maxlength="40"
-                                   value="<%=booking_line_resource.customer_weight%>">
-                          </div>
-                        </div>
-                      <% end %>
+                <h4><%=booking_line.quantity%> <%=booking_line.item_description%></h4>
+                <% booking_line.booking_line_resources.each do |booking_line_resource| %>
+                  <h5 class="widget-title-sub"><%=t.front_end_reservation.summary_page.participant%></h5>
+                  <input type="hidden" name="booking_line_resources[<%=booking_line_resource.id%>][id]" value="<%=booking_line_resource.id%>"/>
+
+                  <% if @booking_item_family.named_resources %>
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_name%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_name]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_name%>" maxlength="80"
+                               value="<%=booking_line_resource.resource_user_name%>">
+
+                      </div>
                     </div>
-                    <% if booking_line_resource.pax == 2 %>
-                    <br>
-                    <h5 class="widget-title"><%=t.front_end_reservation.summary_page.participant%></h5>
-                    <div class="row">
-                      <% if @booking_item_family.named_resources %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_name]"  title="Nombre" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Nombre:" maxlength="80"
-                                   value="<%=booking_line_resource.resource_user_2_name%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_surname]" title="Apellidos" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Apellidos:"  maxlength="80"
-                                   value="<%=booking_line_resource.resource_user_2_surname%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_document_id]" title="NIF/Pasaporte" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="NIF/Pasaporte:"  maxlength="50"
-                                   value="<%=booking_line_resource.resource_user_2_document_id%>">
-                          </div>
-                        </div>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_phone]" title="Teléfono" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Teléfono:"  maxlength="15"
-                                   value="<%=booking_line_resource.resource_user_2_phone%>">
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_email]" title="Correo electrónico" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Corro electrónico:"  maxlength="40"
-                                   value="<%=booking_line_resource.resource_user_2_email%>">
-                          </div>
-                        </div>
-                      <% end %>
-                      <% if @booking_item_family.height %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_2_height]" title="Altura (en cm)" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Altura: (en cm)"  maxlength="40"
-                                   value="<%=booking_line_resource.customer_2_height%>">
-                          </div>
-                        </div>
-                      <% end %>
-                      <% if @booking_item_family.weight %>
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_2_weight]" title="Peso (en kg)" data-toggle="tooltip"
-                                   class="form-control alt" type="text" placeholder="Peso: (en kg)"  maxlength="40"
-                                   value="<%=booking_line_resource.customer_2_weight%>">
-                          </div>
-                        </div>
-                      <% end %>
+                    <div class="clearfix"></div>
+
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_surname%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_surname]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_surname%>" maxlength="80"
+                               value="<%=booking_line_resource.resource_user_surname%>">
+
+                      </div>
                     </div>
-                    <% end %>
-                    <br>
+                    <div class="clearfix"></div>
+
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_document_id%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_document_id]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_document_id%>" maxlength="50"
+                               value="<%=booking_line_resource.resource_user_document_id%>">
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_phone_number%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_phone]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_phone_number%>" maxlength="15"
+                               value="<%=booking_line_resource.resource_user_phone%>">
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_email%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_email]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_email%>" maxlength="40"
+                               value="<%=booking_line_resource.resource_user_email%>">
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
                   <% end %>
 
+                  <% if @booking_item_family.height %>
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_height%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_height]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_height%>" maxlength="20"
+                               value="<%=booking_line_resource.customer_height%>">
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  <% end %>
+
+                  <% if @booking_item_family.height %>
+                    <div class="input2_wrapper">
+                      <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_weight%></label>
+                      <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                        <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_weight]"
+                               class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_weight%>" maxlength="20"
+                               value="<%=booking_line_resource.customer_weight%>">
+
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  <% end %>
+
+                  <% if booking_line_resource.pax == 2 %>
+                    <h5 class="widget-title-sub"><%=t.front_end_reservation.summary_page.participant%></h5>
+                    <% if @booking_item_family.named_resources %>
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_name%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_name]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_name%>" maxlength="80"
+                                 value="<%=booking_line_resource.resource_user_2_name%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_surname%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_surname]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_surname%>" maxlength="80"
+                                 value="<%=booking_line_resource.resource_user_2_surname%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_document_id%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_document_id]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_document_id%>" maxlength="50"
+                                 value="<%=booking_line_resource.resource_user_2_document_id%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_phone_number%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_phone]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_phone_number%>" maxlength="15"
+                                 value="<%=booking_line_resource.resource_user_2_phone%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_email%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][resource_user_2_email]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_email%>" maxlength="40"
+                                 value="<%=booking_line_resource.resource_user_2_email%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    <% end %>
+
+                    <% if @booking_item_family.height %>
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_height%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_2_height]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_height%>" maxlength="20"
+                                 value="<%=booking_line_resource.customer_2_height%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    <% end %>
+
+                    <% if @booking_item_family.height %>
+                      <div class="input2_wrapper">
+                        <label class="col-md-5" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.summary_page.participant_weight%></label>
+                        <div class="col-md-7" style="padding-right:0;padding-left:0;">
+                          <input name="booking_line_resources[<%=booking_line_resource.id%>][customer_2_weight]"
+                                 class="form-control alt" type="text" placeholder="<%=t.front_end_reservation.summary_page.participant_weight%>" maxlength="20"
+                                 value="<%=booking_line_resource.customer_2_weight%>">
+
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    <% end %>
+                  <% end %>
+
+                <% end %>
               <% end %>
             <% end %>
-            <div class="row">
-              <div class="overflowed reservation-now">
-                <div>
-                  <a id="btn_update_reservation" class="btn btn-theme pull-right btn-reservation-now" href="#"><%=t.front_end_reservation.summary_page.update_data_button%></a>
-                </div>
-              </div>
-            </div>
+
+            <div class="margin-top"></div>
+            <div class="clearfix"></div>
+            <a id="btn_update_reservation" href="#" class="btn btn-default btn-cf-submit3"><%=t.front_end_reservation.summary_page.update_data_button%></a>
+
           </form>
-        <% end %>
-        <!-- EXTRA DATA -->
 
-
-        <!-- PAYMENT -->
-        <% if @booking.can_pay? and @booking.can_pay_deposit? and (@payment_methods.tpv_virtual or @payment_methods.paypal)%>
-          <h3 class="block-title alt"><i class="fa"></i><%=t.front_end_reservation.payment_title%></h3>
-          <% if @booking.can_pay_deposit? %>
-          <div class="alert alert-success">
-            <p><%=t.front_end_reservation.payment_to_confirm_reservation(@deposit, "(%.2f #{@currency})" % @booking.booking_amount)%></p>
-          </div>
-          <% end %>
-          <div class="panel-group payments-options" id="accordion" role="tablist" aria-multiselectable="true">
-            <% if @payment_methods.tpv_virtual %>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-payment-method="<%=@payment_methods.tpv_virtual.id%>" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
-                    <span class="dot"></span> <%=t.front_end_reservation.credit_card_payment%>
-                  </a>
-                  <span class="overflowed pull-right">
-                  </span>
-                </h4>
-              </div>
-              <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3"></div>
-            </div>
-            <% end %>
-            <% if @payment_methods.paypal %>
-            <div class="panel panel-default">
-              <div class="panel-heading" role="tab" id="heading4">
-                <h4 class="panel-title">
-                  <a class="collapsed" data-payment-method="paypal_standard" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                    <span class="dot"></span> <%=t.front_end_reservation.paypal_payment%>
-                  </a>
-                  <span class="overflowed pull-right">
-                  </span>
-                </h4>
-              </div>
-              <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4"></div>
-            </div>
-            <% end %>
-
-            <div class="overflowed reservation-now">
-              <div>
-                <a id="btn_pay" class="btn btn-theme pull-right btn-reservation-now" href="#"><%=t.front_end_reservation.booking_detail_pay_button%></a>
-              </div>
-            </div>
-          </div>
-          <% end %>
-          <!-- //PAYMENT -->
+        <% end%>
 
       </div>
-      <!-- /CONTENT -->
 
-      <!-- SIDEBAR -->
-      <aside class="col-md-4 sidebar" id="sidebar">
-        <!-- widget detail reservation -->
-        <div class="widget shadow widget-details-reservation">
-          <div id="reservation_detail">
+      <!-- Separator -->
+      <div class="col-md-1"></div>
 
-            <h4 class="widget-title"><%=t.front_end_reservation.reservation_summary_title%></h4>
-            <div class="widget-content">
-              <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_pickup%></h5>
-              <div class="media">
-                <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
-                <div class="media-body"><p><%=SystemConfiguration::Settings.instance.format_date(@booking.date_from, :full, session[:locale])%> / <%=@booking.time_from%></p></div>
-              </div>
-              <div class="media">
-                <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
-                <div class="media-body"><p><%=@booking.pickup_place_customer_translation%></p></div>
-              </div>
-              <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_return%></h5>
-              <div class="media">
-                <span class="media-object pull-left"><i class="fa fa-calendar"></i></span>
-                <div class="media-body"><p><%=SystemConfiguration::Settings.instance.format_date(@booking.date_to, :full, session[:locale])%> / <%=@booking.time_to%></p></div>
-              </div>
-              <div class="media">
-                <span class="media-object pull-left"><i class="fa fa-location-arrow"></i></span>
-                <div class="media-body"><p><%=@booking.return_place_customer_translation%></p></div>
-              </div>
-              <h5 class="widget-title-sub"><%=t.front_end_reservation.reservation_summary_price%></h5>
-              <div class="list">
-                <ul>
-                  <li><%=t.front_end_reservation.reservation_summary_total_product%>: <span class="pull-right"><%='%.2f' % @booking.item_cost%>€</span></li>
-                  <% if @booking.extras_cost > 0 %>
-                  <li><%=t.front_end_reservation.reservation_summary_total_extras%>: <span class="pull-right"><%='%.2f' % @booking.extras_cost%>€</span></li>
-                  <% end %>
-                  <% if @booking.time_from_cost > 0 %>
-                  <li><%=t.front_end_reservation.reservation_summary_pickup_time_supplement%>: <span class="pull-right"><%= '%.2f' % @booking.extras_cost%>€</span></li>
-                  <% end %>
-                  <% if @booking.time_from_cost > 0 %>
-                  <li><%=t.front_end_reservation.reservation_summary_pickup_place_supplement%>: <span class="pull-right"><%='%.2f' % @booking.pickup_place_cost%>€</span></li>
-                  <% end %>
-                  <% if @booking.time_to_cost > 0 %>
-                  <li><%=t.front_end_reservation.reservation_summary_return_time_supplement%>: <span class="pull-right"><%='%.2f' % @booking.time_to_cost%>€</span></li>
-                  <% end %>
-                  <% if @booking.time_from_cost > 0 %>
-                  <li><%=t.front_end_reservation.reservation_summary_return_place_supplement%>: <span class="pull-right"><%='%.2f' % @booking.return_place_cost%>€</span></li>
-                  <% end %>
-                  <% if total_cost_includes_deposit %>
-                      <% if @booking.total_deposit > 0 %>
-                          <li><%=t.front_end_reservation.reservation_summary_deposit%>*: <span class="pull-right"><%='%.2f' % @booking.total_deposit%>€</span></li>
-                      <% end %>
-                  <% end %>
-                  <li><strong><%=t.front_end_reservation.reservation_summary_total%>:</strong> <span class="pull-right"><strong><%='%.2f' % @booking.total_cost%>€</strong></span></li>
-                  <li><%=t.front_end_reservation.booking_detail_summary_paid%>: <span class="pull-right text-primary"><%='%.2f' % @booking.total_paid%>€</span></li>
-                  <% if @booking.total_pending > 0 %>
-                  <li><%=t.front_end_reservation.booking_detail_summary_pending%>:<span class="pull-right text-danger"><strong><%='%.2f' % @booking.total_pending%>€</strong></span></li>
-                  <% end %>
-                  <% if !total_cost_includes_deposit %>
-                      <% if @booking.total_deposit > 0 %>
-                          <hr>
-                          <li><%=t.front_end_reservation.reservation_summary_deposit%>*: <span class="pull-right"><%='%.2f' % @booking.total_deposit%>€</span></li>
-                      <% end %>
-                  <% end %>
-                  <% if @booking.total_deposit > 0 %>
-                  <li><small>* <%=t.front_end_reservation.reservation_summary_deposit_detail%></small></li>
-                  <% end %>
-                </ul>
-              </div>
+      <!-- Sidebar : Summary -->
+      <div class="col-md-4 booking-row">
+
+        <!-- Summary -->
+        <h3 class="line"><%=t.front_end_reservation.reservation_summary_title%></h3>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_from%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%=SystemConfiguration::Settings.instance.format_date(@booking.date_from, :full, session[:locale])%><% if @booking_item_family and @booking_item_family.time_to_from %> <%=@booking.time_from%><%end%></span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <% if @booking_item_family and @booking_item_family.pickup_return_place %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.pickup_place%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="blue"><%=@booking.pickup_place_customer_translation%></span>
             </div>
           </div>
-        </div>
-        <!-- /widget detail reservation -->
-        <!-- widget helping center -->
-        <div class="widget shadow widget-helping-center" style="display: none">
-          <h4 class="widget-title">Atención al cliente</h4>
-          <div class="widget-content">
-            <p>Vivamus eget nibh. Etiam cursus leo vel metus. Nulla facilisi. Aenean nec eros.</p>
-            <h5 class="widget-title-sub">+34 666 10 10 10</h5>
-            <p><a href="mailto:support@mybooking.es">support@mybooking.es</a></p>
+          <div class="clearfix"></div>
+        <% end %>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_to%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%=SystemConfiguration::Settings.instance.format_date(@booking.date_to, :full, session[:locale])%><% if @booking_item_family and @booking_item_family.time_to_from %> <%=@booking.time_to%><%end%></span>
           </div>
         </div>
-        <!-- /widget helping center -->
-      </aside>
-      <!-- /SIDEBAR -->
+        <div class="clearfix"></div>
+
+        <% if @booking_item_family and @booking_item_family.pickup_return_place %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.return_place%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="blue"><%=@booking.return_place_customer_translation%></span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        <% end %>
+
+        <!-- Extras -->
+        <% if @booking.booking_extras.size > 0 %>
+          <div class="margin-top"></div>
+          <h3 class="line"><%=t.front_end_reservation.booking_detail_extras_title%></h3>
+
+          <% @booking.booking_extras.each do |booking_extra| %>
+            <div class="input2_wrapper">
+              <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=booking_extra.extra_description_customer_translation%> x <%=booking_extra.quantity%></label>
+              <div class="col-md-6" style="padding-right:0;padding-left:0;">
+                <span class="blue"><%= "%.2f" % booking_extra.extra_cost%>€</span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          <% end %>
+        <% end %>
+
+        <!-- Price -->
+        <div class="margin-top"></div>
+        <h3 class="line"><%=t.front_end_reservation.reservation_summary_price%></h3>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_product%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.item_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <% if (@booking.extras_cost > 0) %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_extras%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.extras_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <% if (@booking.time_from_cost > 0) %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_time_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.time_from_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <% if (@booking.pickup_place_cost > 0) %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_place_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.pickup_place_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <% if (@booking.time_to_cost > 0) %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_time_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.time_to_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <% if (@booking.return_place_cost > 0) %>
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_place_supplement%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.return_place_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <% if total_cost_includes_deposit %>
+          <% if @booking.total_deposit > 0 %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="blue"><%= "%.2f" % @booking.total_deposit%>€</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <% end %>
+        <% end %>
+
+        <div class="input2_wrapper">
+          <label class="col-md-6" style="padding-left:0;padding-top:12px; text-transform: uppercase;"><%=t.front_end_reservation.reservation_summary_total%></label>
+          <div class="col-md-6" style="padding-right:0;padding-left:0;">
+            <span class="blue"><%= "%.2f" % @booking.total_cost%>€</span>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <% if @booking.total_paid > 0 %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.booking_detail_summary_paid%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="blue"><%= "%.2f" % @booking.total_paid%>€</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        <% end %>
+
+        <% if @booking.total_pending > 0 %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px; text-transform: uppercase;"><%=t.front_end_reservation.booking_detail_summary_pending%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="red"><%= "%.2f" % @booking.total_pending%>€</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        <% end %>
+
+        <% if !total_cost_includes_deposit %>
+          <% if @booking.total_deposit > 0 %>
+          <div class="input2_wrapper">
+            <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
+            <div class="col-md-6" style="padding-right:0;padding-left:0;">
+              <span class="blue"><%= "%.2f" % @booking.total_deposit%>€</span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <% end %>
+        <% end %>
+
+
+        <% if @booking.total_deposit > 0 %>
+        <div class="input2_wrapper">
+          <label class="col-md-12" style="padding-left:0;padding-top:12px;"><small>* <%=t.front_end_reservation.reservation_summary_deposit_detail%></small></label>
+        </div>
+        <div class="clearfix"></div>
+        <% end %>
+
+        <!-- Payment -->
+        <% if (@booking.can_pay_deposit? or @booking.can_pay_pending? or @booking.can_pay_total?) and (@payment_methods.tpv_virtual or @payment_methods.paypal)%>
+          <div class="margin-top"></div>
+          <h3 class="line"><%=t.front_end_reservation.payment_title%></h3>
+
+          <% if @booking.can_pay_deposit? and !@booking.can_pay_total? %>
+            <div class="alert alert-success">
+              <p><%=t.front_end_reservation.payment_to_confirm_reservation(@deposit, "(%.2f #{@currency})" % @booking.booking_amount)%></p>
+            </div>
+          <% end %>
+
+          <!-- Payment methods -->
+          <div class="panel-group payments-options" id="accordion" role="tablist" aria-multiselectable="true">
+            <% if @payment_methods.tpv_virtual %>
+              <div id="tpv_virtual_container" class="panel panel-default" <%unless @payment_methods.paypal%>style="display:none"<%end%>>
+                <div class="panel-heading" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a class="<% unless @payment_methods.paypal%>show<%else%>collapsed<%end%>"
+                       data-payment-method="<%=@payment_methods.tpv_virtual.id%>" data-toggle="collapse"
+                       data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
+                      <span class="dot"></span> <%=t.front_end_reservation.credit_card_payment%>
+                    </a>
+                    <span class="overflowed pull-right">
+                    <img src="/rentit/img/preview/payments/mastercard-2.jpg" alt=""/>
+                    <img src="/rentit/img/preview/payments/visa-2.jpg" alt=""/>
+                      <!--img src="/rentit/img/preview/payments/american-express-2.jpg" alt=""/>
+                      <img src="/rentit/img/preview/payments/discovery-2.jpg" alt=""/>
+                      <img src="/rentit/img/preview/payments/eheck-2.jpg" alt=""/-->
+                  </span>
+                  </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading3"></div>
+              </div>
+            <% end %>
+            <% if @payment_methods.paypal %>
+              <div id="paypal_container" class="panel panel-default" <%unless @payment_methods.tpv_virtual%>style="display:none"<%end%>>
+                <div class="panel-heading" role="tab" id="heading4">
+                  <h4 class="panel-title">
+                    <a class="<% unless @payment_methods.tpv_virtual%>show<%else%>collapsed<%end%>"
+                       data-payment-method="paypal_standard" data-toggle="collapse" data-parent="#accordion"
+                       href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                      <span class="dot"></span> <%=t.front_end_reservation.paypal_payment%>
+                    </a>
+                    <span class="overflowed pull-right">
+                     <img src="/rentit/img/preview/payments/paypal-2.jpg" alt="">
+                  </span>
+                  </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading4"></div>
+              </div>
+            <% end %>
+
+            <% if @booking.can_pay_deposit? and @booking.can_pay_total? %>
+              <div id="payment_amount_container" <%if @payment_methods.paypal and @payment_methods.tpv_virtual%>style="display:none"<%end%>>
+                <br>
+                <h4><%=t.front_end_reservation.payment_amount%></h4>
+                <br>
+                <form id="payment_amount_form" class="form-additional">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <input type="radio" value="deposit" name="payment"/> <label><%=t.front_end_reservation.payment_amount_deposit%> (<%=@deposit%> %)</label>
+                      </div>
+                      <div class="form-group">
+                        <input type="radio" value="total" name="payment">  <label><%=t.front_end_reservation.payment_amount_total%></label>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            <% end %>
+
+            <br>
+            <a id="btn_pay" href="#" class="btn btn-default btn-cf-submit3"><%=t.front_end_reservation.booking_detail_pay_button%></a>
+
+          </div>
+
+        <% end %>
+
+      </div>
+
     </div>
-</section>
-<!-- /PAGE WITH SIDEBAR -->
+  </div>
+</div>
+
+

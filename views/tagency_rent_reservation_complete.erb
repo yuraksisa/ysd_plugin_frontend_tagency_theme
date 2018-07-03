@@ -274,7 +274,14 @@
       <div class="col-md-1"></div>
       <div class="col-md-4 booking-row">
 
+        <h3 id="extras_title" class="line"><%=t.front_end_reservation.extras_title%></h3>
+        <div id="extras_listing">
+        </div>
+
         <div id="reservation_detail">
+        </div>
+
+        <div id="payment_detail">
         </div>
 
         <div class="margin-top" style="margin-top:40px;"></div>
@@ -348,8 +355,7 @@
   <div class="select">
     <label for="select<%%=extra.code%>"><%%=extra.name%></label>
     <select name="select<%%=extra.code%>" id="select<%%=extra.code%>"
-          class="selectpicker input extra-select pull-right" data-live-search="false" data-width="100%"
-          data-toggle="tooltip" title="Select" data-value="<%%=extra.code%>" data-container="body">
+          class="select input extra-select pull-right"  data-value="<%%=extra.code%>" data-container="body" style="display:block; width: 100%">
       <%% for (var idx=0;idx<=extra.max_quantity;idx++) { %>
       <option value="<%%=idx%>"
         <%% if (extrasInShoppingCart[extra.code] && extrasInShoppingCart[extra.code] == idx) { %>
@@ -359,13 +365,16 @@
       </option>
       <%% } %>
     </select>
+    <br>
+    <br>
   </div>
   <%% } else if (extra.max_quantity == 1) { %>
-  <div class="checkbox checkbox-danger">
-    <input id="checkboxl<%%=extra.code%>" type="checkbox" class="extra-checkbox" data-value="<%%=extra.code%>" <%% if (extrasInShoppingCart[extra.code] &&  extrasInShoppingCart[extra.code] > 0) { %> checked="checked" <%% } %>/>
-    <label for="checkboxl<%%=extra.code%>">
-    <%%=extra.name%> <span class="pull-right"> <%%=new Number(extra.unit_price).toFixed(2)%> € </span>
+  <div style="margin-top: 1em">
+    <label for="checkboxl<%%=extra.code%>" style="display: block">
+      <input id="checkboxl<%%=extra.code%>" type="checkbox" class="extra-checkbox" data-value="<%%=extra.code%>" <%% if (extrasInShoppingCart[extra.code] &&  extrasInShoppingCart[extra.code] > 0) { %> checked="checked" <%% } %>/>
+      <%%=extra.name%> <span class="pull-right"> <%%=new Number(extra.unit_price).toFixed(2)%> € </span>
     </label>
+
   </div>
   <%% } %>
 
@@ -380,7 +389,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_from%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=shopping_cart.date_from_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_from%><%end%></span>
+            <span class="blue"><%%=shopping_cart.date_from_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_from%><%end%></span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -389,7 +398,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.pickup_place%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=shopping_cart.pickup_place_customer_translation%></span>
+            <span class="blue"><%%=shopping_cart.pickup_place_customer_translation%></span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -398,7 +407,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_to%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=shopping_cart.date_to_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_to%><%end%></span>
+            <span class="blue"><%%=shopping_cart.date_to_full_format%><% if booking_item_family and booking_item_family.time_to_from %> <%%=shopping_cart.time_to%><%end%></span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -407,19 +416,19 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.return_place%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=shopping_cart.return_place_customer_translation%></span>
+            <span class="blue"><%%=shopping_cart.return_place_customer_translation%></span>
           </div>
         </div>
         <div class="clearfix"></div>
         <% end %>
 
         <div class="margin-top"></div>
-        <h3><%=t.front_end_reservation.reservation_summary_price%></h3>
+        <h3 class="line"><%=t.front_end_reservation.reservation_summary_price%></h3>
 
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_product%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.item_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.item_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -428,7 +437,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total_extras%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.extras_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.extras_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -438,7 +447,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_time_supplement%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.time_from_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.time_from_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -448,7 +457,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_pickup_place_supplement%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.pickup_place_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.pickup_place_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -458,7 +467,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_time_supplement%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.time_to_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.time_to_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -468,7 +477,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_return_place_supplement%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.return_place_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.return_place_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -479,7 +488,7 @@
         <div class="input2_wrapper">
           <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -487,9 +496,9 @@
         <% end %>
 
         <div class="input2_wrapper">
-          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_total%></label>
+          <label class="col-md-6" style="padding-left:0;padding-top:12px; text-transform: uppercase;"><%=t.front_end_reservation.reservation_summary_total%></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
-            <span class="red"><%%=new Number(shopping_cart.total_cost).toFixed(2)%>€</span>
+            <span class="blue"><%%=new Number(shopping_cart.total_cost).toFixed(2)%>€</span>
           </div>
         </div>
         <div class="clearfix"></div>
@@ -500,7 +509,7 @@
           <div class="input2_wrapper">
             <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.reservation_summary_deposit%></label>
             <div class="col-md-6" style="padding-right:0;padding-left:0;">
-              <span class="red"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
+              <span class="blue"><%%=new Number(shopping_cart.total_deposit).toFixed(2)%>€</span>
             </div>
           </div>
           <div class="clearfix"></div>
@@ -520,8 +529,9 @@
 
 <!-- Script payment -->
 <script type="text/tmpl" id="script_payment_detail">
-  <h3 class="block-title alt"><i class="fa"></i><%=t.front_end_reservation.payment_title%></h3>
+  <h3 class="line"><i class="fa"></i><%=t.front_end_reservation.payment_title%></h3>
   <%% if (sales_process.can_pay) { %>
+  <br>
   <div class="alert alert-success">
     <p><%=t.front_end_reservation.payment_to_confirm_reservation(@deposit)%></p>
   </div>

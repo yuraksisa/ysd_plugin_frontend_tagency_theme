@@ -7,6 +7,8 @@ require(['jquery', 'bootstrap','jquery.ui',
 
       $(document).ready(function() {
 
+        $('ul.sf-menu').superfish();
+
         /*----------------------------------------------------*/
         /* MOBILE DETECT FUNCTION
         /*----------------------------------------------------*/
