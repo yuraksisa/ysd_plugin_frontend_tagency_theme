@@ -27,6 +27,36 @@
     right: 10px;
     color: #c2c2c2;
 }
+
+.change_dates_form .textarea_wrapper {
+    position: relative;
+}
+.change_dates_form .textarea_wrapper .textarea_inner {
+    position: relative;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    height: 42px;
+    position: relative;
+    padding: 10px 25px 10px 15px;
+    height: 100px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    color: #c2c2c2;
+    font-size: 13px !important;
+    line-height: 20px;
+    font-family: inherit !important;
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    resize: vertical;
+}
+.change_dates_form .textarea_wrapper .fa {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    color: #c2c2c2;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #c2c2c2;
 }
@@ -35,6 +65,32 @@
     .form1 .textarea_wrapper {
         margin-bottom: 30px;
     }
+}
+
+#product_listing .txt1 {
+    height: 75px;
+}
+
+.not_available {
+    height: 30px;
+    display: inline-block;
+}
+
+.not_available_select {
+    height: 67px;
+    display: inline-block;
+    padding-top: 45px;
+}
+
+.sidebar-block {
+    padding: 15px 15px;
+}
+
+#change_dates_form select,
+#change_dates_form .select2-container--default .select2-selection--single .select2-selection__rendered,
+#product_listing .select2-container--default .select2-selection--single .select2-selection__rendered,
+#change_dates_form textarea, #change_dates_form input {
+    color: #333;
 }
 
 /* -------------- Payment CSS ------------------- */

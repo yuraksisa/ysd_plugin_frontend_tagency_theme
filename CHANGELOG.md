@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.3] - 2018-07-04
+### Added
+- Theme improvement : Custom pickup/return place
+
 ## [0.1.2] - 2018-07-03
 ### Added
 - Footer 

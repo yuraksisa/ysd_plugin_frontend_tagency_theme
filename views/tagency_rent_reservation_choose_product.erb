@@ -1,27 +1,80 @@
       <div class="row">
         <div class="col-sm-3">
           <div class="sidebar-block">
-            <form action="<%=format_url_with_language('/reserva/producto')%>" >
+            <form action="<%=format_url_with_language('/reserva/producto')%>" id="change_dates_form" class="change_dates_form" method="POST">
+
               <% if booking_item_family and booking_item_family.pickup_return_place %>
-              <div class="col-sm-12 no-padding">
-                <div class="select1_wrapper">
-                  <label><%=t.front_end_reservation.pickup_place%></label>
-                  <div class="select1_inner">
-                    <select name="pickup_place" id="pickup_place" class="select select2">
-                    </select>
+
+                <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+                  <div class="col-sm-12 no-padding">
+                    <div class="select1_wrapper">
+                      <label><%=t.front_end_reservation.pickup_place%></label>
+                      <div class="select1_inner">
+                        <select name="pickup_place" id="pickup_place" class="select select2">
+                        </select>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-              <div class="col-sm-12 no-padding margin-top">
-                <div class="select1_wrapper">
-                  <label><%=t.front_end_reservation.return_place%></label>
-                  <div class="select1_inner">
-                    <select name="return_place" id="return_place" class="select select2">
-                    </select>
+                  <% if pickup_return_places_configuration == 'list+custom'%>
+                  <div class="col-sm-12 no-padding">
+                    <div id="another_pickup_place_group" class="form-group margin-top">
+                      <div class="textarea_wrapper">
+                        <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                        <input type="hidden" name="custom_pickup_place" value="false"/>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                  <% end %>
+                <% else %>
+                  <div class="col-sm-12 no-padding">
+                    <div class="form-group">
+                      <label for="pickup_place">
+                        <%=t.front_end_reservation.pickup_place%>:
+                      </label>
+                      <div class="textarea_wrapper">
+                        <textarea name="pickup_place_other" id="pickup_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.pickup_place_address%>"></textarea>
+                        <i class="fa fa-map-marker"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
+                <div class="clearfix"></div>
+
+                <% if ['list','list+custom'].include?(pickup_return_places_configuration) %>
+                  <div class="col-sm-12 no-padding margin-top">
+                    <div class="select1_wrapper">
+                      <label><%=t.front_end_reservation.return_place%></label>
+                      <div class="select1_inner">
+                        <select name="return_place" id="return_place" class="select select2">
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <% if pickup_return_places_configuration == 'list+custom'%>
+                    <div class="col-sm-12 no-padding">
+                      <div id="another_return_place_group" class="form-group margin-top">
+                        <div class="textarea_wrapper">
+                          <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.return_place_address%>"></textarea>
+                          <input type="hidden" name="custom_return_place" value="false"/>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="col-sm-12 no-padding">
+                    <div class="form-group">
+                      <label for="return_place">
+                        <%=t.front_end_reservation.return_place%>:
+                      </label>
+                      <div class="textarea_wrapper">
+                        <textarea name="return_place_other" id="return_place_other" class="textarea_inner" placeholder="<%=t.front_end_reservation.return_place_address%>"></textarea>
+                        <i class="fa fa-map-marker"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
               <% end %>
 
               <!-- Date from -->
@@ -111,7 +164,7 @@
               <div class="thumb6">
                 <div class="thumbnail clearfix">
                   <figure>
-                    <img src="<%%=product.full_photo%>" alt="" style="object-fit: cover; width: 100%max-height: 100%;">
+                    <img src="<%%=product.full_photo%>" alt="" style="object-fit: cover; width: 100%; min-height: 200px; max-height: 100%;">
                     <div class="over">
                       <div class="v1"><%%=product.name%></div>
                       <div class="v2"><%%=product.short_description%></div>
@@ -137,7 +190,9 @@
                             </div>
                           </div>
                         <%% } else { %>
-                        <div class="right_side"><%=t.front_end_reservation.not_available%></div>
+                        <div class="right_side">
+                           <span class="not_available_select"><%=t.front_end_reservation.not_available%></span>
+                        </div>
                         <%% } %>
                       <% else %>
                         <div class="left_side">
@@ -148,7 +203,9 @@
                         <div class="right_side">
                            <a href="#" class="btn-default btn1 btn-choose-product" data-product="<%%=product.code%>"><%=t.front_end_reservation.select%></a></div>
                         <%% } else { %>
-                        <div class="right_side"><%=t.front_end_reservation.not_available%></div>
+                        <div class="right_side">
+                           <span class="not_available"><%=t.front_end_reservation.not_available%></span>
+                        </div>
                         <%% } %>
                       <% end %>
                      </div>
