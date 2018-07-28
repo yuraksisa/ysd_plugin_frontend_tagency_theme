@@ -8,21 +8,32 @@
       <div class="col-sm-12 col-md-10 col-md-offset-1">
         <div class="block ">
           <div class="block-header bg-gray-lighter">
+            <h3 class="block-title">Logo</h3>
+          </div>
+          <div class="block-content block-content-narrow">
+            <%= render_variable_photo_uploader('site.logo') %>
+            <p class="text-center">Tamaño recomendado 400x100</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-md-offset-1">
+        <div class="block ">
+          <div class="block-header bg-gray-lighter">
             <h3 class="block-title">Slideshow portada</h3>
           </div>
           <div class="block-content block-content-narrow">
+
+            <h4>Imagen de fondo</h4>
+
+            <%= render_variable_photo_uploader('frontend.skin.tagency.slider1_img_bg') %>
+            <p class="text-center">Tamaño recomendado 1920x1080</p>
+
+            <br>
+
             <form name="variables" action="/api/variables" method="PUT"
                   data-remote="ajax" data-remote-method="PUT" class="form-horizontal">
-
-              <h4>Imagen de fondo</h4>
-
-              <% if @slider_1_img and !@slider_1_img.to_s.empty? and !(@slider_1_img.to_s == '.') %>
-                <div>
-                  <img src="<%=@slider_1_img%>"/>
-                </div>
-              <% end %>
-
-              <br>
 
               <h4>Texto slide 1</h4>
               <%= render_variable_input_text('frontend.skin.tagency.slider1_text_1',

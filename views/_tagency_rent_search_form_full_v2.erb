@@ -39,7 +39,7 @@
       <div class="col-sm-3">
         <div class="input1_wrapper">
           <label for="date_from">
-            <%=t.front_end_reservation.date_from%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_from'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
@@ -49,7 +49,7 @@
       <div class="col-sm-3">
         <div class="select1_wrapper">
           <label for="time_from">
-            <%=t.front_end_reservation.time_from%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['time_from'] %>:
           </label>
           <div class="select1_inner">
             <select name="time_from" id="time_from" class="select2 select">
@@ -94,7 +94,7 @@
       <div class="col-sm-3">
         <div class="input1_wrapper">
           <label for="date_to">
-            <%=t.front_end_reservation.date_to%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_to'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
@@ -104,7 +104,7 @@
       <div class="col-sm-3">
         <div class="select1_wrapper">
           <label for="time_to">
-            <%=t.front_end_reservation.time_to%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['time_to'] %>:
           </label>
           <div class="select1_inner">
             <select name="time_to" id="time_to" class="select2 select">
@@ -166,7 +166,7 @@
       <div class="col-sm-3">
         <div class="input1_wrapper">
           <label for="date_from">
-            <%=t.front_end_reservation.date_from%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_from'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
@@ -212,7 +212,7 @@
       <div class="col-sm-3">
         <div class="input1_wrapper">
           <label for="date_to">
-            <%=t.front_end_reservation.date_to%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_to'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
@@ -242,7 +242,7 @@
       <div class="<% if !driver_partial and !promotion_code_partial%>col-sm-offset-3<%elsif !driver_partial or !promotion_code_partial%>col-sm-offset-1<%end%> col-sm-3">
         <div class="input1_wrapper">
           <label for="date_from">
-            <%=t.front_end_reservation.date_from%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_from'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
@@ -253,7 +253,7 @@
       <div class="col-sm-3">
         <div class="input1_wrapper">
           <label for="date_to">
-            <%=t.front_end_reservation.date_to%>:
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_to'] %>:
           </label>
           <div class="input1_inner">
             <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">

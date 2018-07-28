@@ -470,7 +470,7 @@
         <h3 class="line"><%=t.front_end_reservation.reservation_summary_title%></h3>
 
         <div class="input2_wrapper">
-          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_from%></label>
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[@booking_item_family.starting_date.to_s]['date_from'] %></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
             <span class="blue"><%=SystemConfiguration::Settings.instance.format_date(@booking.date_from, :full, session[:locale])%><% if @booking_item_family and @booking_item_family.time_to_from %> <%=@booking.time_from%><%end%></span>
           </div>
@@ -488,7 +488,7 @@
         <% end %>
 
         <div class="input2_wrapper">
-          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.date_to%></label>
+          <label class="col-md-6" style="padding-left:0;padding-top:12px;"><%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[@booking_item_family.starting_date.to_s]['date_to'] %></label>
           <div class="col-md-6" style="padding-right:0;padding-left:0;">
             <span class="blue"><%=SystemConfiguration::Settings.instance.format_date(@booking.date_to, :full, session[:locale])%><% if @booking_item_family and @booking_item_family.time_to_from %> <%=@booking.time_to%><%end%></span>
           </div>

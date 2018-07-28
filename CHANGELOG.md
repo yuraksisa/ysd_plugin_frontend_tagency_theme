@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.4] - 2018-07-28
+### Added
+- Modal for product/extras detail
+- Upload logo and slide photo
+- Date literals depending on business
+
 ## [0.1.3] - 2018-07-04
 ### Added
 - Theme improvement : Custom pickup/return place
