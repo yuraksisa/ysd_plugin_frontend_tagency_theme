@@ -180,7 +180,7 @@
                             <label><%=t.front_end_reservation.choose_product.choose_quantity%></label>
                             <div class="select1_inner">
                               <select class="select2 select select-choose-product input pull-right" data-value="<%%=product.code%>">
-                                 <%% for (var idx=0;idx<=(product.stock-product.busy);idx++) { %>
+                                 <%% for (var idx=0;idx<=(product.available);idx++) { %>
                                    <option value="<%%=idx%>"
                                     <%% if (productsInShoppingCart[product.code] && productsInShoppingCart[product.code] == idx) { %>
                                     selected="selected"
