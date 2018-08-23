@@ -552,7 +552,7 @@
     <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="headingThree">
               <h4 class="panel-title">
-                  <a class="<% unless @payment_methods.paypal%>show<%else%>collapsed<%end%>" data-payment-method="<%=@payment_methods.tpv_virtual.id%>" data-toggle="collapse"
+                  <a class="collapsed" data-payment-method="<%=@payment_methods.tpv_virtual.id%>" data-toggle="collapse"
                      data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapseThree">
                       <span class="dot"></span> <%=t.front_end_reservation.credit_card_payment%>
                   </a>
@@ -569,7 +569,7 @@
     <div class="panel panel-default">
           <div class="panel-heading" role="tab" id="heading4">
               <h4 class="panel-title">
-                  <a class="<% unless @payment_methods.tpv_virtual%>show<%else%>collapsed<%end%>"
+                  <a class="collapsed"
                      data-payment-method="paypal_standard" data-toggle="collapse" data-parent="#accordion"
                      href="#collapse4" aria-expanded="false" aria-controls="collapse4">
                       <span class="dot"></span> <%=t.front_end_reservation.paypal_payment%>

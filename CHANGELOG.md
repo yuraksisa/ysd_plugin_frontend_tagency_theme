@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.7] - 2018-08-23
+### Updated
+- Payment method in new reservation
+
 ## [0.1.6] - 2018-08-23
 ### Updated
 - Payment method in new reservation
