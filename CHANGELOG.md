@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.6] - 2018-08-23
+### Updated
+- Payment method in new reservation
+
 ## [0.1.5] - 2018-08-10
 ### Updated
 - Available attribute in product search taking into account stock_control
