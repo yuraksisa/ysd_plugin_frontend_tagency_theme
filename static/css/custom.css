@@ -175,6 +175,10 @@
     color: #14181c;
 }
 
+.product-detail{
+    cursor: pointer;
+}
+
 /* -------------- JQUERY Toast ------------------- */
 /**
  * jQuery toast plugin created by Kamran Ahmed copyright MIT license 2014

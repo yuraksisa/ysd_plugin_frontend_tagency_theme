@@ -201,7 +201,7 @@ module YsdPluginFrontendTagencyTheme
       selected_menu_item = "<li id=\"menu_item_<%=leaf[:id]%>\" class=\"active\"><a href=\"<%=leaf[:link_route]%>\"><%=leaf[:title]%></a></li>"
       end_submenu   = "</ul></li>"
       end_menu      = "</ul>"
-      separator     = "&nbsp;"
+      separator     = ""
       extra_end_menu = ""
 
       menu_adapter = Adapters::MenuAdapter.new(menu, locale, default_locale, multilanguage_site)

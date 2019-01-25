@@ -164,10 +164,10 @@
               <div class="thumb6">
                 <div class="thumbnail clearfix">
                   <figure>
-                    <img src="<%%=product.full_photo%>" alt="" style="object-fit: cover; width: 100%; min-height: 200px; max-height: 100%;">
-                    <div class="over">
-                      <div class="v1"><%%=product.name%></div>
-                      <div class="v2"><%%=product.short_description%></div>
+                    <img src="<%%=product.full_photo%>" alt="" class="product-detail" data-product="<%%=product.code%>" style="object-fit: cover; width: 100%; min-height: 200px; max-height: 100%;">
+                    <div class="over product-detail" data-product="<%%=product.code%>">
+                      <div class="v1 product-detail" data-product="<%%=product.code%>"><%%=product.name%></div>
+                      <div class="v2 product-detail" data-product="<%%=product.code%>"><%%=product.short_description%></div>
                     </div>
                   </figure>
                   <div class="caption">
@@ -215,4 +215,81 @@
             </div>
 
 
+      </script>
+
+      <!-- Custom template from product detail modal -->
+
+      <script type="text/tmpl" id="product_detail_script">
+
+        <%% if (product.photos.length > 1) { %>
+          <div class="post-slide" style="display:none">
+            <div id="sl1">
+                <a class="sl1_prev" href="#"></a>
+                <a class="sl1_next" href="#"></a>
+                <div class="sl1_pagination"></div>
+                <div class="carousel-box">
+                    <div class="inner">
+                        <div class="carousel main">
+                            <ul>
+                                <%% for (var idx=0;idx<product.photos.length-1;idx++){%>
+                                <li>
+                                    <div class="sl1">
+                                        <div class="sl1_inner">
+                                            <img src="<%%=product.photos[idx].full_photo_path%>" alt=""
+                                                 class="img-responsive">
+                                        </div>
+                                    </div>
+                                </li>
+                                <%% } %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        <%% } else { %>  
+        <img src="<%%=product.full_photo%>" style="display: block; margin: 0 auto; max-width: 100%"/>
+        <%% } %>
+        <br>
+        <%%=product.description%>
+
+      </script>
+
+      <!-- Custom JS Script for product detail modal -->
+
+      <script type="text/javascript" id="product_detail_slider_js">
+
+        function productDetailSlider() {
+          var o = $('#sl1 .carousel.main ul');
+            if (o.length > 0) {
+              o.carouFredSel({
+                auto: {
+                  timeoutDuration: 3000
+                },
+                responsive: true,
+                prev: '.sl1_prev',
+                next: '.sl1_next',
+                pagination: '.sl1_pagination',
+                width: '100%',
+                scroll: {
+                  items: 1,
+                  duration: 1000,
+                  easing: "easeOutExpo"
+                },
+                items: {
+                      width: '2000',
+                  height: 'variable', //  optionally resize item-height
+                  visible: {
+                    min: 1,
+                    max: 1
+                  }
+                },
+                mousewheel: false,
+                swipe: {
+                  onMouse: true,
+                  onTouch: true
+                  }
+              });
+            }
+        }
       </script>
