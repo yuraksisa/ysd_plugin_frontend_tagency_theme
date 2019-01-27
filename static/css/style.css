@@ -232,10 +232,12 @@ transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; -webkit-trans
 .select1_inner{position: relative; background: #fff; border: 1px solid #ebebeb; height: 42px; position: relative;}
 .select1_inner:after{content: ''; display: block; width: 10px; height: 7px; background: url(/tagency/images/a1.png) 0 0 no-repeat; position: absolute; right: 10px; top: 17px;}
 
+
 .select2{width: 100%;}
 .select2 *:focus{outline: none!important;}
 
-.select2-container--default .select2-results > .select2-results__options{max-height: 500px;overflow:hidden;}
+/*.select2-container--default .select2-results > .select2-results__options{max-height: 500px;overflow:hidden;}*/
+.select2-container--default .select2-results > .select2-results__options{max-height: 500px;}
 .select2-container--default .select2-selection--single{background: none;border-radius: 0; border: none; height: auto;}
 .select2-container--default .select2-selection--single .select2-selection__rendered{font-size: 13px; line-height: 20px; padding: 10px 20px 10px 15px; color: #c2c2c2;}
 .select2_inner .select2-container--default .select2-selection--single .select2-selection__rendered{padding-left: 0;}

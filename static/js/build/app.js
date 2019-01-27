@@ -30,6 +30,7 @@ requirejs(['jquery',
            "jquery.caroufredsel",
            "jquery.touchSwipe",
            "jquery.ui.totop",
+           "jquery.isotope",
            // Travel Agency theme - stop
            'json2', 
            'datejs',

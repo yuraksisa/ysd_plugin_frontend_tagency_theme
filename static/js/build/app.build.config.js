@@ -32,7 +32,8 @@ requirejs.config({
         "jquery.appear"           : "jquery.appear",
         "jquery.caroufredsel"     : "jquery.caroufredsel",
         "jquery.touchSwipe"       : "jquery.touchSwipe",
-        "jquery.ui.totop"         : "jquery.ui.totop"
+        "jquery.ui.totop"         : "jquery.ui.totop",
+        "jquery.isotope"           : "jquery.isotope",
         // Travel agency theme - end
     },
 
@@ -60,6 +61,7 @@ requirejs.config({
         "jquery.caroufredsel" : ['jquery'],
         "jquery.touchSwipe" : ['jquery'],
         "jquery.ui.totop" : ['jquery'],
+        "jquery.isotope" : ['jquery'],
         // Travel agency theme - end
         "bootstrap.select": ['bootstrap'],
         "json2" : { 

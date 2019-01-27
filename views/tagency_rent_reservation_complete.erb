@@ -72,6 +72,17 @@
                      placeholder="<%=t.front_end_reservation.field_customer_alternative_phone_number%>:"  spellcheck="false" autocomplete="off">
             </div>
           </div>
+
+          <div class="clearfix"></div>
+          <h3 class="line"><%=t.front_end_reservation.additional_information_title%></h3>
+          <div class="input2_wrapper">
+            <label class="col-md-12" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_comments%></label>
+            <div class="col-md-12" style="padding-right:0;padding-left:0;">
+              <textarea name="comments" id="comments"
+                        class="form-control" rows="10" style="height: auto"></textarea>
+            </div>
+          </div>
+
           <div class="clearfix"></div>
 
           <% if booking_item_family.driver_license %>
@@ -257,19 +268,6 @@
 
         </form>
 
-        <div class="clearfix"></div>
-
-        <h3 class="line"><%=t.front_end_reservation.additional_information_title%></h3>
-        <form action="#" class="form-horizontal">
-          <div class="input2_wrapper">
-            <label class="col-md-12" style="padding-left:0;padding-top:12px;"><%=t.front_end_reservation.field_comments%></label>
-            <div class="col-md-12" style="padding-right:0;padding-left:0;">
-              <textarea name="comments" id="comments"
-                        class="form-control" rows="10" style="height: auto"></textarea>
-            </div>
-          </div>
-        </form>
-
       </div>
       <div class="col-md-1"></div>
       <div class="col-md-4 booking-row">
@@ -370,11 +368,10 @@
   </div>
   <%% } else if (extra.max_quantity == 1) { %>
   <div style="margin-top: 1em">
-    <label for="checkboxl<%%=extra.code%>" style="display: block">
+    <label for="checkboxl<%%=extra.code%>" style="display: block"></label>
       <input id="checkboxl<%%=extra.code%>" type="checkbox" class="extra-checkbox" data-value="<%%=extra.code%>" <%% if (extrasInShoppingCart[extra.code] &&  extrasInShoppingCart[extra.code] > 0) { %> checked="checked" <%% } %>/>
-      <%%=extra.name%> <span class="pull-right"> <%%=new Number(extra.unit_price).toFixed(2)%> € </span>
-    </label>
-
+      <span style="color:#434343;font-size:14px;font-weight:bold"><%%=extra.name%> <span class="fa-info-extra" rel="<%%=extra.code%>"><i class="fa fa-info-circle"></i></span></span> <span class="pull-right"> <%%=new Number(extra.unit_price).toFixed(2)%> € </span>
+    
   </div>
   <%% } %>
 
