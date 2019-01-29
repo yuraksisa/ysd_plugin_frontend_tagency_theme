@@ -174,38 +174,51 @@
                     <div class="txt1"><%%=product.name%>&nbsp;<span class="product-detail" data-product="<%%=product.code%>"><i class="fa fa-info-circle"></i></span></div>
                     <div class="txt3 clearfix">
                       <% if booking_item_family and booking_item_family.frontend == :shopcart %>
-                        <%% if (product.availability) { %>
-                          <br>
-                          <div class="select1_wrapper">
-                            <label><%=t.front_end_reservation.choose_product.choose_quantity%></label>
-                            <div class="select1_inner">
-                              <select class="select2 select select-choose-product input pull-right" data-value="<%%=product.code%>">
-                                 <%% for (var idx=0;idx<=(product.available);idx++) { %>
-                                   <option value="<%%=idx%>"
-                                    <%% if (productsInShoppingCart[product.code] && productsInShoppingCart[product.code] == idx) { %>
-                                    selected="selected"
-                                    <%%}%>><%%=idx%> (<%%=new Number(product.price * idx).toFixed(2)%> €)</option>
-                                    <%% } %>
-                               </select>
+                        <%% if (shoppingCart.days < product.min_days) { %>
+                          <div class="right_side">
+                               <span class="not_available_select"><%=t.front_end_reservation.min_days%> <%%= product.min_days%></span>
+                          </div>                          
+                        <%% } else { %>  
+                          <%% if (product.availability) { %>
+                            <br>
+                            <div class="select1_wrapper">
+                              <label><%=t.front_end_reservation.choose_product.choose_quantity%></label>
+                              <div class="select1_inner">
+                                <select class="select2 select select-choose-product input pull-right" data-value="<%%=product.code%>">
+                                   <%% for (var idx=0;idx<=(product.available);idx++) { %>
+                                     <option value="<%%=idx%>"
+                                      <%% if (productsInShoppingCart[product.code] && productsInShoppingCart[product.code] == idx) { %>
+                                      selected="selected"
+                                      <%%}%>><%%=idx%> (<%%=new Number(product.price * idx).toFixed(2)%> €)</option>
+                                      <%% } %>
+                                 </select>
+                              </div>
                             </div>
-                          </div>
-                        <%% } else { %>
-                        <div class="right_side">
-                           <span class="not_available_select"><%=t.front_end_reservation.not_available%></span>
-                        </div>
-                        <%% } %>
+                          <%% } else { %>
+                            <div class="right_side">
+                               <span class="not_available_select"><%=t.front_end_reservation.not_available%></span>
+                            </div>
+                          <%% } %>                         
+                        <%% } %>  
                       <% else %>
+                        <%% if (shoppingCart.days >= product.min_days) { %>
                         <div class="left_side">
                           <div class="price"><%%=new Number(product.price).toFixed(2)%></div>
-                          <!--div class="nums">per/Day</div-->
                         </div>
-                        <%% if (product.availability) { %>
-                        <div class="right_side">
-                           <a href="#" class="btn-default btn1 btn-choose-product" data-product="<%%=product.code%>"><%=t.front_end_reservation.select%></a></div>
-                        <%% } else { %>
-                        <div class="right_side">
-                           <span class="not_available"><%=t.front_end_reservation.not_available%></span>
-                        </div>
+                        <%% } %>
+                        <%% if (shoppingCart.days < product.min_days) { %>                       
+                          <div class="right_side">
+                             <span class="btn btn-sm btn-danger not_available"><%=t.front_end_reservation.min_days%> <%%= product.min_days%></span>
+                          </div>                          
+                        <%% } else { %>  
+                          <%% if (product.availability) { %>
+                          <div class="right_side">
+                             <a href="#" class="btn-default btn1 btn-choose-product" data-product="<%%=product.code%>"><%=t.front_end_reservation.select%></a></div>
+                          <%% } else { %>
+                          <div class="right_side">
+                             <span class="not_available"><%=t.front_end_reservation.not_available%></span>
+                          </div>
+                          <%% } %>
                         <%% } %>
                       <% end %>
                      </div>

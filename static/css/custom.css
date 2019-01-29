@@ -67,8 +67,10 @@
     }
 }
 
+.thumb6 .thumbnail .caption .txt1{font-size: 14px; }
+
 #product_listing .txt1 {
-    height: 75px;
+    height: 40px;
 }
 
 .not_available {

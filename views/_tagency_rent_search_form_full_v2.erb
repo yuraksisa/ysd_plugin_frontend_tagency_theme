@@ -273,6 +273,67 @@
       <% end %>
     </div>
     <br/>
+  <% elsif booking_item_family and !booking_item_family.pickup_return_place and booking_item_family.time_to_from %>
+  
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_from">
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_from'] %>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_from" name="date_from" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="select1_wrapper">
+          <label for="time_from">
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['time_from'] %>:
+          </label>
+          <div class="select1_inner">
+            <select name="time_from" id="time_from" class="select2 select">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="input1_wrapper">
+          <label for="date_to">
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['date_to'] %>:
+          </label>
+          <div class="input1_inner">
+            <input id="date_to" name="date_to" type="text" class="input datepicker" value="Mm/Dd/Yy" autocomplete="off">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="select1_wrapper">
+          <label for="time_to">
+            <%= BookingDataSystem.r18n.t.booking_business_literals.starting_date[booking_item_family.starting_date.to_s]['time_to'] %>:
+          </label>
+          <div class="select1_inner">
+            <select name="time_to" id="time_to" class="select2 select">
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br/>
+    <% if driver_partial or promotion_code_partial %>
+      <div class="row">
+        <% if driver_partial %>
+          <div class="col-sm-6">
+            <%= driver_partial %>
+          </div>
+        <% end %>
+        <% if promotion_code_partial %>
+          <div class="col-sm-6">
+            <%= promotion_code_partial %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
   <div class="row">
     <div class="col-sm-offset-8 col-sm-4 col-md-offset-10 col-md-2">
