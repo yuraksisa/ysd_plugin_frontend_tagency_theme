@@ -14,7 +14,7 @@
                                                         <li>
                                                             <div class="sl1">
                                                                 <div class="sl1_inner">
-                                                                    <img src="<%=photo.photo_url_medium%>" alt=""
+                                                                    <img src="<%=photo.photo_url_full%>" alt=""
                                                                          class="img-responsive">
                                                                 </div>
                                                             </div>
@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="post-story-body clearfix">
-                                    <p><%= content.excerpt if content and content.body and not content.body.empty?%> ... <a class="read-more" href="<%=format_url_with_language(content.alias)%>"><%=t.content.read_more%></a></p>
+                                    <p><%= content.excerpt if content and content.body and not content.body.empty?%> ... </p>
 
                                 </div>
                                 <div class="post-story-link">
